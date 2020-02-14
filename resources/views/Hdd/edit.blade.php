@@ -8,3 +8,5 @@
 @section('page')
     Data
 @endsection
+@section('content')
+@endsection
