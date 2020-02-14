@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('header')
-    Tambah Data
+    Edit Data
 @endsection
 @section('home')
     home
@@ -17,12 +17,13 @@
             <div class="card card-primary">
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="{{route('data_hdd.store')}}" method="POST">
+              <form role="form" action="{{ route('data_rak.update',$rak->id_rak)}}" method="POST">
+              {{method_field('put')}}
               @csrf
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="ukuran_hdd">Ukuran Hdd</label>
-                    <input type="number" class="form-control" name="ukuran_hdd" placeholder="Ukuran Hdd">
+                    <label for="nomer_rak">Nomer Rak</label>
+                    <input type="number" class="form-control" name="nomer_rak" value="{{$rak->nomer_rak}}">
                   </div>
                 </div>
                 <!-- /.card-body -->

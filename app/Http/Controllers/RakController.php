@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Hdd;
-class HddController extends Controller
+use App\Rak;
+
+class RakController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +14,8 @@ class HddController extends Controller
      */
     public function index()
     {
-        $data_hdd = Hdd::all();
-        return view('Hdd.dashboard', compact('data_hdd'));
+        $data_rak = Rak::all();
+        return view('Rak.dashboard', compact('data_rak'));
     }
 
     /**
@@ -24,7 +25,7 @@ class HddController extends Controller
      */
     public function create()
     {
-        return view('Hdd.create');
+        return view('Rak.create');
     }
 
     /**
@@ -35,8 +36,8 @@ class HddController extends Controller
      */
     public function store(Request $request)
     {
-        Hdd::create($request->all());
-        return redirect()->route('data_hdd.index');
+        Rak::create($request->all());
+        return redirect()->route('data_rak.index');
     }
 
     /**
@@ -58,8 +59,8 @@ class HddController extends Controller
      */
     public function edit($id)
     {
-        $hdd = Hdd::all()->where('id_hdd',$id)->first();
-        return view('Hdd.edit', compact('hdd'));
+        $rak = Rak::all()->where('id_rak',$id)->first();
+        return view('Rak.edit', compact('rak'));
     }
 
     /**
@@ -71,10 +72,10 @@ class HddController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $hdd = Hdd::find($id);
-        $hdd->ukuran_hdd = $request->get('ukuran_hdd');
-        $hdd->update();
-        return redirect()->route('data_hdd.index');
+        $rak = Rak::find($id);
+        $rak->nomer_rak = $request->get('nomer_rak');
+        $rak->update();
+        return redirect()->route('data_rak.index');
     }
 
     /**
@@ -85,7 +86,7 @@ class HddController extends Controller
      */
     public function destroy($id)
     {
-        Hdd::destroy($id);
-        return redirect()->route('data_hdd.index');
+        Rak::destroy($id);
+        return redirect()->route('data_rak.index');
     }
 }

@@ -194,7 +194,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../../index3.html" class="nav-link">
+                <a href="{{route('data_rak.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Rak</p>
                 </a>

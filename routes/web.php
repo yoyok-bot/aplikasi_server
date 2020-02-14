@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 Route::resource('/data_ram', 'RamController');
 Route::resource('/data_hdd', 'HddController');
+Route::resource('/data_rak', 'RakController');
