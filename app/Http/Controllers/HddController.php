@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Hdd;
+use Yajra\DataTables\DataTables;
+
 class HddController extends Controller
 {
     /**
@@ -17,6 +19,16 @@ class HddController extends Controller
         return view('Hdd.dashboard', compact('data_hdd'));
     }
 
+    public function tablehdd()
+    {
+        return DataTables::of(Hdd::all())
+            ->addColumn('action', function ($data) {
+                $del = '<a href="#" data-id="' . $data->id_hdd . '" class="hapus-data" style="font-size: 15px"><i class="fa fa-trash"></i> Delete</a>';
+                $edit = '<a href="' . route('data_hdd.edit', $data->id_hdd) . '" style="font-size: 15px"><i class="fa fa-edit"></i> Edit</a>';
+                return $edit . '&nbsp' . ' | ' . '&nbsp' . $del;
+            })
+            ->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +48,7 @@ class HddController extends Controller
     public function store(Request $request)
     {
         Hdd::create($request->all());
-        return redirect()->route('data_hdd.index');
+        return redirect()->route('data_hdd.index')->with(['success' => 'Berhasil Disimpan']);
     }
 
     /**
@@ -73,8 +85,9 @@ class HddController extends Controller
     {
         $hdd = Hdd::find($id);
         $hdd->ukuran_hdd = $request->get('ukuran_hdd');
+        $hdd->keterangan = $request->get('keterangan');
         $hdd->update();
-        return redirect()->route('data_hdd.index');
+        return redirect()->route('data_hdd.index')->with(['success' => 'Berhasil Diedit']);
     }
 
     /**
@@ -86,6 +99,5 @@ class HddController extends Controller
     public function destroy($id)
     {
         Hdd::destroy($id);
-        return redirect()->route('data_hdd.index');
     }
 }

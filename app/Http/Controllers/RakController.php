@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Rak;
+use Yajra\DataTables\DataTables;
 
 class RakController extends Controller
 {
@@ -14,8 +15,17 @@ class RakController extends Controller
      */
     public function index()
     {
-        $data_rak = Rak::all();
-        return view('Rak.dashboard', compact('data_rak'));
+        return view('Rak.dashboard');
+    }
+    public function tablerak()
+    {
+        return DataTables::of(Rak::all())
+            ->addColumn('action', function ($data) {
+                $del = '<a href="#" data-id="' . $data->id_rak . '" class="hapus-data" style="font-size: 15px"><i class="fa fa-trash"></i> Delete</a>';
+                $edit = '<a href="' . route('data_rak.edit', $data->id_rak) . '" style="font-size: 15px"><i class="fa fa-edit"></i> Edit</a>';
+                return $edit . '&nbsp' . ' | ' . '&nbsp' . $del;
+            })
+            ->make(true);
     }
 
     /**
@@ -37,7 +47,7 @@ class RakController extends Controller
     public function store(Request $request)
     {
         Rak::create($request->all());
-        return redirect()->route('data_rak.index');
+        return redirect()->route('data_rak.index')->with(['success' => 'Berhasil Disimpan']);
     }
 
     /**
@@ -75,7 +85,7 @@ class RakController extends Controller
         $rak = Rak::find($id);
         $rak->nomer_rak = $request->get('nomer_rak');
         $rak->update();
-        return redirect()->route('data_rak.index');
+        return redirect()->route('data_rak.index')->with(['success' => 'Berhasil Diubah']);
     }
 
     /**
@@ -87,6 +97,5 @@ class RakController extends Controller
     public function destroy($id)
     {
         Rak::destroy($id);
-        return redirect()->route('data_rak.index');
     }
 }

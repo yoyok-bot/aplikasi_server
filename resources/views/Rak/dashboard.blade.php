@@ -9,6 +9,12 @@
     Data
 @endsection
 @section('content')
+@if ($message = Session::get('success'))
+      <div class="alert alert-success alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button> 
+          <strong>{{ $message }}</strong>
+      </div>
+    @endif
     <div class="col-sm-12">
         <a href="{{route('data_rak.create')}}" class="btn btn-primary float-right">Tambah Data</a>
     </div>
@@ -25,28 +31,58 @@
                 </tr>
             </thead>
             <tbody>
-            @php($i=1)
-            @foreach($data_rak as $rak)
-                <tr>
-                <td>{{$i}}</td>
-                <td>{{$rak->nomer_rak}}</td>
-                <td>
-                    <div class="row">
-                    <form action="{{route('data_rak.edit', $rak->id_rak)}}">
-                        <button type="submit" class="btn"><i class="fa fa-edit"></i></button>
-                    </form>
-                    <form action="{{route('data_rak.destroy', $rak->id_rak)}}" method="POST">
-                    {{method_field('delete')}}
-                    @csrf
-                        <button type="submit" class="btn"><i class="fa fa-trash"></i></button>
-                    </form>
-                    </div>
-                </td>
-                </tr>
+           
             </tbody>
-            @php($i++)
-            @endforeach
         </table>
     </div>
 </div>
 @endsection
+@push('script')
+<script>
+            $(document).ready(function () {
+                var dt = $('#table1').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: '{{route('table.rak')}}',
+                    columns: [{
+                        data: 'id_rak',
+                        name: 'id_rak'
+                    },
+                        {
+                            data: 'nomer_rak',
+                            name: 'nomer_rak'
+                        },
+                        {data: 'action', name: 'action', orderable: false, searchable: false, align: 'center'},
+                    ]
+                });
+                var del = function (id) {
+                    swal({
+                        title: "Apakah anda yakin?",
+                        text: "Anda tidak dapat mengembalikan data yang sudah terhapus!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Iya!",
+                        cancelButtonText: "Tidak!",
+                    }).then(
+                        function (result) {
+                            $.ajax({
+                                url: "data_rak/" + id+"/delete",
+                                method: "DELETE",
+                            }).done(function (msg) {
+                                dt.ajax.reload();
+                                swal("Deleted!", "Data sudah terhapus.", "success");
+                            }).fail(function (textStatus) {
+                                alert("Request failed: " + textStatus);
+                            });
+                        }, function (dismiss) {
+                            // dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+                            swal("Cancelled", "Data batal dihapus", "error");
+                        });
+                };
+                $('body').on('click', '.hapus-data', function () {
+                    del($(this).attr('data-id'));
+                });
+            });
+        </script>
+@endpush

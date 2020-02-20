@@ -9,6 +9,12 @@
     Data
 @endsection
 @section('content')
+@if ($message = Session::get('success'))
+      <div class="alert alert-success alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button> 
+          <strong>{{ $message }}</strong>
+      </div>
+    @endif
     <div class="col-sm-12">
         <a href="{{route('data_hdd.create')}}" class="btn btn-primary float-right">Tambah Data</a>
     </div>
@@ -20,33 +26,68 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Ukuran</th>
+                    <th>Ukuran Hdd</th>
+                    <th>Keterangan</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-            @php($i=1)
-            @foreach($data_hdd as $hdd)
-                <tr>
-                <td>{{$i}}</td>
-                <td>{{$hdd->ukuran_hdd}}</td>
-                <td>
-                    <div class="row">
-                    <form action="{{route('data_hdd.edit', $hdd->id_hdd)}}">
-                        <button type="submit" class="btn"><i class="fa fa-edit"></i></button>
-                    </form>
-                    <form action="{{route('data_hdd.destroy', $hdd->id_hdd)}}" method="POST">
-                    {{method_field('delete')}}
-                    @csrf
-                        <button type="submit" class="btn"><i class="fa fa-trash"></i></button>
-                    </form>
-                    </div>
-                </td>
-                </tr>
+
             </tbody>
-            @php($i++)
-            @endforeach
         </table>
     </div>
 </div>
 @endsection
+@push('script')
+<script>
+            $(document).ready(function () {
+                var dt = $('#table1').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: '{{route('table.hdd')}}',
+                    columns: [{
+                        data: 'id_hdd',
+                        name: 'id_hdd'
+                    },
+                        {
+                            data: 'ukuran_hdd',
+                            name: 'ukuran_hdd'
+                        },
+                        {
+                            data: 'keterangan',
+                            name: 'keterangan'
+                        },
+                        {data: 'action', name: 'action', orderable: false, searchable: false, align: 'center'},
+                    ]
+                });
+                var del = function (id) {
+                    swal({
+                        title: "Apakah anda yakin?",
+                        text: "Anda tidak dapat mengembalikan data yang sudah terhapus!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Iya!",
+                        cancelButtonText: "Tidak!",
+                    }).then(
+                        function (result) {
+                            $.ajax({
+                                url: "data_hdd/" + id+"/delete",
+                                method: "DELETE",
+                            }).done(function (msg) {
+                                dt.ajax.reload();
+                                swal("Deleted!", "Data sudah terhapus.", "success");
+                            }).fail(function (textStatus) {
+                                alert("Request failed: " + textStatus);
+                            });
+                        }, function (dismiss) {
+                            // dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+                            swal("Cancelled", "Data batal dihapus", "error");
+                        });
+                };
+                $('body').on('click', '.hapus-data', function () {
+                    del($(this).attr('data-id'));
+                });
+            });
+        </script>
+@endpush

@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Aplikasi Server</title>
   <!-- Tell the browser to be responsive to screen width -->
@@ -9,6 +10,7 @@
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('assets/plugins/fontawesome-free/css/all.min.css')}}">
+  <link href="{{asset('plugins/sweet-alert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- overlayScrollbars -->
@@ -155,7 +157,7 @@
           <img src="{{asset('assets/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -194,6 +196,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{route('data_core.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Core</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{route('data_rak.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Rak</p>
@@ -211,32 +219,46 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('data_ram.index')}}" class="nav-link">
+                <a href="{{route('data_perangkat.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Perangkat</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../../index2.html" class="nav-link">
+                <a href="{{route('data_server.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Server</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../../index3.html" class="nav-link">
+                <a href="{{route('data_vps.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data VPS</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../../index3.html" class="nav-link">
+                <a href="{{route('data_aplikasi.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Aplikasi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('data_aplikasi.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Aplikasi</p>
                 </a>
               </li>
             </ul>
           </li>
-        </ul>
+        <li class="nav-item has-treeview">
+            <a href="{{route('logout')}}" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Logout
+              </p>
+            </a>
+          </li>
+</ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -292,10 +314,15 @@
 <script src="{{asset('assets/dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('assets/dist/js/demo.js')}}"></script>
+<script src="{{asset('plugins/sweet-alert2/sweetalert2.min.js')}}"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> -->
 <script>
-  $(function () {
-    $("#table1").DataTable();
-  });
+ $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 </script>
+@stack('script')
 </body>
 </html>

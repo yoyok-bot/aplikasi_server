@@ -8,6 +8,6 @@ class Hdd extends Model
 {
     protected $table = 'tb_hdd';
     protected $primaryKey = 'id_hdd';
-    protected $fillable = ['ukuran_hdd'];
+    protected $fillable = ['ukuran_hdd','keterangan'];
     public $timestamps = false;
 }

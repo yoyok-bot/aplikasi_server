@@ -3,7 +3,7 @@
     Tambah Data
 @endsection
 @section('home')
-    home
+<a href="{{route('data_hdd.index')}}" >Kembali</a>
 @endsection
 @section('page')
     Data Ram
@@ -22,7 +22,11 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="ukuran_hdd">Ukuran Hdd</label>
-                    <input type="number" class="form-control" name="ukuran_hdd" placeholder="Ukuran Hdd">
+                    <input type="text" class="form-control" name="ukuran_hdd" placeholder="Ukuran Hdd">
+                  </div>
+                  <div class="form-group">
+                    <label for="keterangan">Keterangan(GB/TERA)</label>
+                    <input type="text" class="form-control" name="keterangan" placeholder="MB/GB/TERA">
                   </div>
                 </div>
                 <!-- /.card-body -->

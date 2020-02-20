@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ram;
+use Yajra\DataTables\DataTables;
 
 class RamController extends Controller
 {
@@ -16,6 +17,16 @@ class RamController extends Controller
     {
         $data_ram = Ram::all();
         return view('Ram.dashboard', compact('data_ram'));
+    }
+    public function tableram()
+    {
+        return DataTables::of(Ram::all())
+            ->addColumn('action', function ($data) {
+                $del = '<a href="#" data-id="' . $data->id_ram . '" class="hapus-data" style="font-size: 15px"><i class="fa fa-trash"></i> Delete</a>';
+                $edit = '<a href="' . route('data_ram.edit', $data->id_ram) . '" style="font-size: 15px"><i class="fa fa-edit"></i> Edit</a>';
+                return $edit . '&nbsp' . ' | ' . '&nbsp' . $del;
+            })
+            ->make(true);
     }
 
     /**
@@ -37,7 +48,7 @@ class RamController extends Controller
     public function store(Request $request)
     {
         Ram::create($request->all());
-        return redirect()->route('data_ram.index');
+        return redirect()->route('data_ram.index')->with(['success' => 'Berhasil Disimpan']);
     }
 
     /**
@@ -76,7 +87,7 @@ class RamController extends Controller
         $ram = Ram::find($id);
         $ram->ukuran_ram = $request->get('ukuran_ram');
         $ram->update();
-        return redirect()->route('data_ram.index');
+        return redirect()->route('data_ram.index')->with(['success' => 'Berhasil Diedit']);
     }
 
     /**
@@ -88,6 +99,5 @@ class RamController extends Controller
     public function destroy($id)
     {
         Ram::destroy($id);
-        return redirect()->route('data_ram.index');
     }
 }

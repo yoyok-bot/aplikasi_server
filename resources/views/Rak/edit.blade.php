@@ -3,7 +3,7 @@
     Edit Data
 @endsection
 @section('home')
-    home
+<a href="{{route('data_rak.index')}}">Kembali</a>
 @endsection
 @section('page')
     Data Ram
