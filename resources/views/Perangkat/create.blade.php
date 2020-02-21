@@ -61,7 +61,7 @@
                   </div>
                   <div class="form-group">
                     <label for="jumlah_core">Jumlah Core</label>
-                    <select class="form-control" name="id_rak">
+                    <select class="form-control" name="id_core">
                     <option>Pilih Rak</option>
                     @foreach ($data_core as $core)
                     <option value="{{ $core->id_core }}"> {{ $core->jumlah_core }}</option>
