@@ -25,8 +25,8 @@ class RakController extends Controller
     {
         return DataTables::of(Rak::all())
             ->addColumn('action', function ($data) {
-                $del = '<a href="#" data-id="' . $data->id_rak . '" class="hapus-data" style="font-size: 15px"><i class="fa fa-trash"></i> Delete</a>';
-                $edit = '<a href="' . route('data_rak.edit', $data->id_rak) . '" style="font-size: 15px"><i class="fa fa-edit"></i> Edit</a>';
+                $del = '<a href="#" data-id="' . $data->id_rak . '" class="hapus-data" style="font-size: 15px"><i style="color:#d9534f" class="fa fa-trash"></i></a>';
+                $edit = '<a href="' . route('data_rak.edit', $data->id_rak) . '" style="font-size: 15px"><i style="color:#5cb85c" class="fa fa-edit"></i></a>';
                 return $edit . '&nbsp' . ' | ' . '&nbsp' . $del;
             })
             ->make(true);
@@ -50,6 +50,9 @@ class RakController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nomer_rak' => 'numeric|unique:tb_rak|required'
+        ]);
         Rak::create($request->all());
         return redirect()->route('data_rak.index')->with(['success' => 'Berhasil Disimpan']);
     }
@@ -86,6 +89,9 @@ class RakController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nomer_rak' => 'numeric|unique:tb_rak|required'
+        ]);
         $rak = Rak::find($id);
         $rak->nomer_rak = $request->get('nomer_rak');
         $rak->update();

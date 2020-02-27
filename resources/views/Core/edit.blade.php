@@ -23,7 +23,10 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="jumlah_core">Jumlah Core</label>
-                    <input type="number" class="form-control" name="jumlah_core" value="{{$core->jumlah_core}}">
+                    <input type="text" class="form-control" name="jumlah_core" value="{{$core->jumlah_core}}">
+                    @if ($errors->any())
+                        {!! $errors->first('jumlah_core', '<p style="font-size: 12px; color:red">ERROR! input Jumlah Core Harus Berupa Angka</p>') !!}
+                    @endif
                   </div>
                 </div>
                 <!-- /.card-body -->

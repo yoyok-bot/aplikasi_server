@@ -25,11 +25,25 @@
                     <input type="text" class="form-control" name="nama_aplikasi" placeholder="Nama Aplikasi">
                   </div>
                   <div class="form-group">
+                    <label for="ip_vps">Ip Vps</label>
+                    <input type="text" class="form-control" name="ip_vps" placeholder="Ip Vps">
+                    @if ($errors->any())
+                        {!! $errors->first('ip_vps', '<p style="font-size: 12px; color:red">ERROR! input Ip Server Tidak Boleh Sama</p>') !!}
+                    @endif
+                  </div>
+                  <div class="form-group">
+                    <label for="ip_public">Ip Public</label>
+                    <input type="text" class="form-control" name="ip_public" placeholder="Ip Public">
+                    @if ($errors->any())
+                        {!! $errors->first('ip_public', '<p style="font-size: 12px; color:red">ERROR! input Ip Public Tidak Boleh Sama</p>') !!}
+                    @endif
+                  </div>
+                  <div class="form-group">
                     <label for="id_perangkat">Nama Perangkat</label>
                     <select class="form-control" name="id_perangkat">
                     <option>Pilih Nama Perangkat</option>
                     @foreach ($data_perangkat as $perangkat)
-                    <option value="{{ $perangkat->id_perangkat }}"> {{ $perangkat->nama_perangkat }} (Tipe : {{ $perangkat->tipe_perangkat }} & Kepemilikan : {{ $perangkat->status_kepemilikan }})</option>
+                    <option value="{{ $perangkat->id_perangkat }}"> Nama Perangkat : {{ $perangkat->nama_perangkat }} || Ip Server : {{ $perangkat->ip_server }}</option>
                     @endforeach    
                     </select>
                   </div>

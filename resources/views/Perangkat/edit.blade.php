@@ -34,6 +34,22 @@
                     <input type="text" class="form-control" name="status_kepemilikan" value="{{$data_perangkat->status_kepemilikan}}">
                   </div>
                   <div class="form-group">
+                    <label for="ip_server">Ip Server</label>
+                    <input type="text" class="form-control" name="ip_server" value="{{$data_perangkat->ip_server}}">
+                    @if ($errors->any())
+                        {!! $errors->first('ip_server', '<p style="font-size: 12px; color:red">ERROR! input Ip Server Harus Berupa Angka / Tidak Boleh Sama</p>') !!}
+                    @endif
+                  </div>
+                  <div class="form-group">
+                    <label for="status_server">Status Server</label>
+                    <select class="form-control" name="status_server">
+                    <option>Pilih Status Server</option>
+                    <option value="Aktif" {{ $data_perangkat->status_server == 'Aktif' ? 'selected="selected"' : '' }}> Aktif</option>
+                    <option value="Tidak Aktif" {{ $data_perangkat->status_server == 'Tidak Aktif' ? 'selected="selected"' : '' }}> Tidak Aktif</option>
+                    <option value="Rusak" {{ $data_perangkat->status_server == 'Rusak' ? 'selected="selected"' : '' }}> Rusak</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
                     <label for="id_hdd">Ukuran Hdd</label>
                     <select class="form-control" name="id_hdd">
                     <option>Pilih Ukuran Hdd</option>

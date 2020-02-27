@@ -22,15 +22,25 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="nama_perangkat">Nama Perangkat</label>
-                    <input type="text" class="form-control" name="nama_perangkat" placeholder="Nama perangkat">
+                    <input type="text" class="form-control" name="nama_perangkat" value="{{old('nama_perangkat')}}" placeholder="Nama perangkat">
                   </div>
                   <div class="form-group">
                     <label for="tipe_perangkat">Tipe Perangkat</label>
-                    <input type="text" class="form-control" name="tipe_perangkat" placeholder="Tipe Perangkat">
+                    <input type="text" class="form-control" name="tipe_perangkat" value="{{old('tipe_perangkat')}}" placeholder="Tipe Perangkat">
                   </div>
                   <div class="form-group">
                     <label for="status_kepemilikan">Satus Kepemilikan</label>
-                    <input type="text" class="form-control" name="status_kepemilikan" placeholder="Status Kepemilikan">
+                    <input type="text" class="form-control" name="status_kepemilikan" value="{{old('status_kepemilikan')}}" placeholder="Status Kepemilikan">
+                  </div>
+                  <div class="form-group">
+                    <label for="ip_server">Ip Server (192.168.99.01)</label>
+                    <input type="text" class="form-control" name="ip_server" value="{{old('ip_server')}}" placeholder="Ip_Server">
+                    @if ($errors->any())
+                        {!! $errors->first('ip_server', '<p style="font-size: 12px; color:red">ERROR! input Ip Server Tidak Boleh Sama</p>') !!}
+                    @endif
+                  </div>
+                  <div class="form-group">
+                    <input type="hidden" class="form-control" name="status" value="Aktif">
                   </div>
                   <div class="form-group">
                     <label for="id_hdd">Ukuran Hdd</label>

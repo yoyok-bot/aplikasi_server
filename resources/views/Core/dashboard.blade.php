@@ -44,12 +44,15 @@
                     processing: true,
                     serverSide: true,
                     ajax: '{{route('table.core')}}',
+                    "fnCreatedRow": function (row, data, index) {
+                    $('td', row).eq(0).html(index + 1)
+			},
                     columns: [{
-                        data: 'id_core',
+                        data: 'id_core', width: '10px',
                         name: 'id_core'
                     },
                     {
-                            data: 'jumlah_core',
+                            data: 'jumlah_core', width: '120px',
                             name: 'jumlah_core'
                         },
                         {data: 'action', name: 'action', orderable: false, searchable: false, align: 'center'},

@@ -26,8 +26,8 @@ class RamController extends Controller
     {
         return DataTables::of(Ram::all())
             ->addColumn('action', function ($data) {
-                $del = '<a href="#" data-id="' . $data->id_ram . '" class="hapus-data" style="font-size: 15px"><i class="fa fa-trash"></i> Delete</a>';
-                $edit = '<a href="' . route('data_ram.edit', $data->id_ram) . '" style="font-size: 15px"><i class="fa fa-edit"></i> Edit</a>';
+                $del = '<a href="#" data-id="' . $data->id_ram . '" class="hapus-data" style="font-size: 15px"><i style="color:#d9534f" class="fa fa-trash"></i></a>';
+                $edit = '<a href="' . route('data_ram.edit', $data->id_ram) . '" style="font-size: 15px"><i style="color:#5cb85c" class="fa fa-edit"></i></a>';
                 return $edit . '&nbsp' . ' | ' . '&nbsp' . $del;
             })
             ->make(true);
@@ -51,6 +51,9 @@ class RamController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'ukuran_ram' => 'numeric|unique:tb_ram|required'
+        ]);
         Ram::create($request->all());
         return redirect()->route('data_ram.index')->with(['success' => 'Berhasil Disimpan']);
     }
@@ -88,6 +91,9 @@ class RamController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'ukuran_ram' => 'numeric|unique:tb_ram|required'
+        ]);
         $ram = Ram::find($id);
         $ram->ukuran_ram = $request->get('ukuran_ram');
         $ram->update();

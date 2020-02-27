@@ -19,6 +19,7 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="{{asset('assets/dist/css/adminlte.min.css')}}">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+@stack('css')
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -221,24 +222,6 @@
                 <a href="{{route('data_perangkat.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Perangkat</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('data_server.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Data Server</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('data_vps.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Data VPS</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('data_aplikasi.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Data Aplikasi</p>
                 </a>
               </li>
               <li class="nav-item">

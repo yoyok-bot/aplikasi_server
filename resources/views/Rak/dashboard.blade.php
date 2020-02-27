@@ -44,12 +44,15 @@
                     processing: true,
                     serverSide: true,
                     ajax: '{{route('table.rak')}}',
+                    "fnCreatedRow": function (row, data, index) {
+                    $('td', row).eq(0).html(index + 1)
+			},
                     columns: [{
-                        data: 'id_rak',
+                        data: 'id_rak', width: '10px',
                         name: 'id_rak'
                     },
                         {
-                            data: 'nomer_rak',
+                            data: 'nomer_rak', width: '120px',
                             name: 'nomer_rak'
                         },
                         {data: 'action', name: 'action', orderable: false, searchable: false, align: 'center'},

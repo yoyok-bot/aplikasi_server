@@ -26,9 +26,9 @@ class HddController extends Controller
     public function tablehdd()
     {
         return DataTables::of(Hdd::all())
-            ->addColumn('action', function ($data) {
-                $del = '<a href="#" data-id="' . $data->id_hdd . '" class="hapus-data" style="font-size: 15px"><i class="fa fa-trash"></i> Delete</a>';
-                $edit = '<a href="' . route('data_hdd.edit', $data->id_hdd) . '" style="font-size: 15px"><i class="fa fa-edit"></i> Edit</a>';
+            ->addColumn('action',  function ($data) {
+                $del = '<a href="#" data-id="' . $data->id_hdd . '" class="hapus-data" style="font-size: 15px"><i style="color:#d9534f" class="fa fa-trash"></i></a>';
+                $edit = '<a href="' . route('data_hdd.edit', $data->id_hdd) . '" style="font-size: 15px"><i style="color:#5cb85c" class="fa fa-edit"></i></a>';
                 return $edit . '&nbsp' . ' | ' . '&nbsp' . $del;
             })
             ->make(true);
@@ -51,6 +51,10 @@ class HddController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'ukuran_hdd' => 'numeric|unique:tb_hdd|required',
+            'keterangan' => 'required'
+        ]);
         Hdd::create($request->all());
         return redirect()->route('data_hdd.index')->with(['success' => 'Berhasil Disimpan']);
     }
@@ -87,6 +91,10 @@ class HddController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'ukuran_hdd' => 'numeric|unique:tb_hdd|required',
+            'keterangan' => 'required'
+        ]);
         $hdd = Hdd::find($id);
         $hdd->ukuran_hdd = $request->get('ukuran_hdd');
         $hdd->keterangan = $request->get('keterangan');

@@ -22,7 +22,10 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="ukuran_ram">Ukuran Ram</label>
-                    <input type="number" class="form-control" name="ukuran_ram" placeholder="Ukuran Ram">
+                    <input type="text" class="form-control" name="ukuran_ram" value="{{old('ukuran_ram')}}" placeholder="Ukuran Ram">
+                    @if ($errors->any())
+                        {!! $errors->first('ukuran_ram', '<p style="font-size: 12px; color:red">ERROR! input Ukuran Ram Harus Berupa Angka / Tidak Boleh Sama</p>') !!}
+                    @endif
                   </div>
                 </div>
                 <!-- /.card-body -->

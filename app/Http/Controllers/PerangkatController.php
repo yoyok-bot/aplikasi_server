@@ -32,9 +32,9 @@ class PerangkatController extends Controller
     {
         return DataTables::of(Perangkat::all())
             ->addColumn('action', function ($data) {
-                $del = '<a href="#" data-id="' . $data->id_perangkat . '" class="hapus-data" style="font-size: 15px"><i class="fa fa-trash"></i> Delete</a>';
-                $edit = '<a href="' . route('data_perangkat.edit', $data->id_perangkat) . '" style="font-size: 15px"><i class="fa fa-edit"></i> Edit</a>';
-                $show = '<a href="' . route('data_perangkat.show', $data->id_perangkat) . '" style="font-size: 15px"><i class="fa fa-eye"></i> Show</a>';
+                $del = '<a href="#" data-id="' . $data->id_perangkat . '" class="hapus-data" style="font-size: 15px"><i style="color:#d9534f" class="fa fa-trash"></i></a>';
+                $edit = '<a href="' . route('data_perangkat.edit', $data->id_perangkat) . '" style="font-size: 15px"><i style="color:#5cb85c" class="fa fa-edit"></i></a>';
+                $show = '<a href="' . route('data_perangkat.show', $data->id_perangkat) . '" style="font-size: 15px"><i class="fa fa-eye"></i></a>';
                 return $show . '&nbsp' . ' | ' . '&nbsp' . $edit . '&nbsp' . ' | ' . '&nbsp' . $del;
             })
             ->make(true);
@@ -61,6 +61,9 @@ class PerangkatController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'ip_server' => 'nullable|unique:tb_perangkat'
+        ]);
         Perangkat::create($request->all());
         return redirect()->route('data_perangkat.index')->with(['success' => 'Berhasil Disimpan']);
     }
@@ -80,7 +83,7 @@ class PerangkatController extends Controller
                     ->join('tb_rak','tb_rak.id_rak','=','tb_perangkat.id_rak')
                     ->join('tb_core','tb_core.id_core','=','tb_perangkat.id_core')
                     ->select('tb_perangkat.id_perangkat','tb_perangkat.nama_perangkat as nama'
-                    ,'tb_perangkat.tipe_perangkat','tb_perangkat.status_kepemilikan'
+                    ,'tb_perangkat.tipe_perangkat','tb_perangkat.status_kepemilikan','tb_perangkat.ip_server','tb_perangkat.status_server'
                     ,'tb_ram.ukuran_ram','tb_hdd.ukuran_hdd','tb_hdd.keterangan','tb_rak.nomer_rak','tb_core.jumlah_core')
                     ->where('tb_perangkat.id_perangkat',$id)->first();
         return view('Perangkat.detail',compact('detail_perangkat'));
@@ -104,7 +107,7 @@ class PerangkatController extends Controller
                     ->join('tb_rak','tb_rak.id_rak','=','tb_perangkat.id_rak')
                     ->join('tb_core','tb_core.id_core','=','tb_perangkat.id_core')
                     ->select('tb_perangkat.id_perangkat','tb_perangkat.nama_perangkat'
-                    ,'tb_perangkat.tipe_perangkat','tb_perangkat.status_kepemilikan'
+                    ,'tb_perangkat.tipe_perangkat','tb_perangkat.status_kepemilikan','tb_perangkat.ip_server','tb_perangkat.status_server'
                     ,'tb_ram.id_ram','tb_ram.ukuran_ram','tb_hdd.id_hdd','tb_hdd.ukuran_hdd','tb_rak.id_rak','tb_rak.nomer_rak','tb_core.id_core','tb_core.jumlah_core')
                     ->where('tb_perangkat.id_perangkat',$id)->first();
         return view('Perangkat.edit',compact('data_perangkat','data_hdd','data_ram','data_rak','data_core'));
@@ -119,10 +122,15 @@ class PerangkatController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'ip_server' => 'nullable|unique:tb_perangkat|required'
+        ]);
         $perangkat = Perangkat::find($id);
         $perangkat->nama_perangkat = $request->get('nama_perangkat');
         $perangkat->tipe_perangkat = $request->get('tipe_perangkat');
         $perangkat->status_kepemilikan = $request->get('status_kepemilikan');
+        $perangkat->ip_server = $request->get('ip_server');
+        $perangkat->status_server = $request->get('status_server');
         $perangkat->id_hdd = $request->get('id_hdd');
         $perangkat->id_ram = $request->get('id_ram');
         $perangkat->id_rak = $request->get('id_rak');

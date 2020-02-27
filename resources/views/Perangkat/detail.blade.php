@@ -31,6 +31,12 @@
                   <li class="list-group-item">
                     <b>Nomer Rak</b> <a class="float-right">{{$detail_perangkat->nomer_rak}}</a>
                   </li>
+                  <li class="list-group-item">
+                    <b>Ip Server</b> <a class="float-right">{{$detail_perangkat->ip_server}}</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Status Server</b> <a class="float-right">{{$detail_perangkat->status_server}}</a>
+                  </li>
                 </ul>
               </div>
             </div>

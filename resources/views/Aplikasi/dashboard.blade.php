@@ -28,6 +28,7 @@
                     <th>No</th>
                     <th>Nama Aplikasi</th>
                     <th>Nama Perangkat</th>
+                    <th>Ip Server</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -45,6 +46,9 @@
                     processing: true,
                     serverSide: true,
                     ajax: '{{route('table.aplikasi')}}',
+                    "fnCreatedRow": function (row, data, index) {
+                    $('td', row).eq(0).html(index + 1)
+			},
                     columns: [{
                             data: 'id_aplikasi',
                             name: 'id_aplikasi'
@@ -53,9 +57,13 @@
                         data: 'nama_aplikasi',
                         name: 'nama_aplikasi'
                     },
-                        {
+                    {
                             data: 'nama_perangkat',
                             name: 'nama_perangkat'
+                        },
+                        {
+                            data: 'ip_server',
+                            name: 'ip_server'
                         },
                         {data: 'action', name: 'action', orderable: false, searchable: false, align: 'center'},
                     ]

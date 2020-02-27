@@ -27,8 +27,8 @@ class CoreController extends Controller
     {
         return DataTables::of(Core::all())
             ->addColumn('action', function ($data) {
-                $del = '<a href="#" data-id="' . $data->id_core . '" class="hapus-data" style="font-size: 15px"><i class="fa fa-trash"></i> Delete</a>';
-                $edit = '<a href="' . route('data_core.edit', $data->id_core) . '" style="font-size: 15px"><i class="fa fa-edit"></i> Edit</a>';
+                $del = '<a href="#" data-id="' . $data->id_core . '" class="hapus-data" style="font-size: 15px"><i style="color:#d9534f" class="fa fa-trash"></i></a>';
+                $edit = '<a href="' . route('data_core.edit', $data->id_core) . '" style="font-size: 15px"><i style="color:#5cb85c" class="fa fa-edit"></i></a>';
                 return $edit . '&nbsp' . ' | ' . '&nbsp' . $del;
             })
             ->make(true);
@@ -52,6 +52,9 @@ class CoreController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'jumlah_core' => 'numeric|unique:tb_core|required'
+        ]);
         Core::create($request->all());
         return redirect()->route('data_core.index')->with(['success' => 'Berhasil Disimpan']);
     }
@@ -88,6 +91,9 @@ class CoreController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'jumlah_core' => 'numeric|unique:tb_core|required'
+        ]);
         $core = Core::find($id);
         $core->jumlah_core = $request->get('jumlah_core');
         $core->update();

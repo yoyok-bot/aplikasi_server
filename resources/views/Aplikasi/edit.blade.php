@@ -26,6 +26,14 @@
                     <input type="text" class="form-control" name="nama_aplikasi" value="{{$data_aplikasi->nama_aplikasi}}">
                   </div>
                   <div class="form-group">
+                    <label for="ip_vps">Ip Vps</label>
+                    <input type="text" class="form-control" name="ip_vps" value="{{$data_aplikasi->ip_vps}}">
+                  </div>
+                  <div class="form-group">
+                    <label for="ip_public">Ip Public</label>
+                    <input type="text" class="form-control" name="ip_public" value="{{$data_aplikasi->ip_public}}">
+                  </div>
+                  <div class="form-group">
                     <label for="id_perangkat">Nama Perangkat</label>
                     <select class="form-control" name="id_perangkat">
                     <option>Pilih Nama Perangkat</option>

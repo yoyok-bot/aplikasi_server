@@ -26,7 +26,7 @@
             <thead>
             <tr>
                 <th >No</th>
-                <th >Ukuran</th>
+                <th >Ukuran Ram</th>
                 <th >Aksi</th>
             </tr>
             </thead>
@@ -44,12 +44,15 @@
                     processing: true,
                     serverSide: true,
                     ajax: '{{route('table.ram')}}',
+                    "fnCreatedRow": function (row, data, index) {
+                    $('td', row).eq(0).html(index + 1)
+			},
                     columns: [{
-                        data: 'id_ram',
+                        data: 'id_ram', width: '10px',
                         name: 'id_ram'
                     },
                         {
-                            data: 'ukuran_ram',
+                            data: 'ukuran_ram', width: '120px',
                             name: 'ukuran_ram'
                         },
                         {data: 'action', name: 'action', orderable: false, searchable: false, align: 'center'},

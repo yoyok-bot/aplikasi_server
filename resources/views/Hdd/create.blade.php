@@ -22,12 +22,18 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="ukuran_hdd">Ukuran Hdd</label>
-                    <input type="text" class="form-control" name="ukuran_hdd" placeholder="Ukuran Hdd">
+                    <input type="text" class="form-control" name="ukuran_hdd" value="{{old('ukuran_hdd')}}" placeholder="Ukuran Hdd">
+                    @if ($errors->any())
+                        {!! $errors->first('ukuran_hdd', '<p style="font-size: 12px; color:red">ERROR! input Ukuran Hdd Harus Berupa Angka / Tidak Boleh Sama</p>') !!}
+                    @endif
                   </div>
                   <div class="form-group">
                     <label for="keterangan">Keterangan(GB/TERA)</label>
-                    <input type="text" class="form-control" name="keterangan" placeholder="MB/GB/TERA">
-                  </div>
+                    <input type="text" class="form-control" name="keterangan" value="{{old('keteragan')}}" placeholder="MB/GB/TERA">
+                    @if ($errors->any())
+                        {!! $errors->first('keterangan', '<p style="font-size: 12px; color:red">ERROR! input Keterangan Harus Berupa Karakter</p>') !!}
+                    @endif
+                </div>
                 </div>
                 <!-- /.card-body -->
 

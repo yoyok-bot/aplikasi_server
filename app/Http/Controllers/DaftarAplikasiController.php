@@ -33,12 +33,12 @@ class DaftarAplikasiController extends Controller
     {
         return DataTables::of(DB::table('tb_daftar_aplikasi')
         ->join('tb_perangkat','tb_perangkat.id_perangkat','=','tb_daftar_aplikasi.id_perangkat')
-        ->select('tb_daftar_aplikasi.id_aplikasi','tb_daftar_aplikasi.nama_aplikasi'
-        ,'tb_perangkat.id_perangkat','tb_perangkat.nama_perangkat','tb_perangkat.tipe_perangkat','tb_perangkat.status_kepemilikan')
+        ->select('tb_daftar_aplikasi.id_aplikasi','tb_daftar_aplikasi.nama_aplikasi','tb_daftar_aplikasi.ip_vps','tb_daftar_aplikasi.ip_public'
+        ,'tb_perangkat.id_perangkat','tb_perangkat.nama_perangkat','tb_perangkat.tipe_perangkat','tb_perangkat.status_kepemilikan','tb_perangkat.ip_server')
         ->get())
             ->addColumn('action', function ($data) {
-                $del = '<a href="#" data-id="' . $data->id_aplikasi . '" class="hapus-data" style="font-size: 15px"><i class="fa fa-trash"></i> Delete</a>';
-                $edit = '<a href="' . route('data_aplikasi.edit', $data->id_aplikasi) . '" style="font-size: 15px"><i class="fa fa-edit"></i> Edit</a>';
+                $del = '<a href="#" data-id="' . $data->id_aplikasi . '" class="hapus-data" style="font-size: 15px"><i style="color:#d9534f" class="fa fa-trash"></i></a>';
+                $edit = '<a href="' . route('data_aplikasi.edit', $data->id_aplikasi) . '" style="font-size: 15px"><i style="color:#5cb85c" class="fa fa-edit"></i></a>';
                 return $edit . '&nbsp' . ' | ' . '&nbsp' . $del;
             })
             ->make(true);
@@ -63,6 +63,10 @@ class DaftarAplikasiController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'ip_vps' => 'nullable|unique:tb_daftar_aplikasi',
+            'ip_public' => 'nullable|unique:tb_daftar_aplikasi'
+        ]);
         DaftarAplikasi::create($request->all());
         return redirect()->route('data_aplikasi.index')->with(['success' => 'Berhasil Disimpan']);
     }
@@ -89,7 +93,7 @@ class DaftarAplikasiController extends Controller
         $data_perangkat = Perangkat::all();
         $data_aplikasi = DB::table('tb_daftar_aplikasi')
                     ->join('tb_perangkat','tb_perangkat.id_perangkat','=','tb_daftar_aplikasi.id_perangkat')
-                    ->select('tb_daftar_aplikasi.id_aplikasi','tb_daftar_aplikasi.nama_aplikasi','tb_daftar_aplikasi.id_perangkat'
+                    ->select('tb_daftar_aplikasi.id_aplikasi','tb_daftar_aplikasi.nama_aplikasi','tb_daftar_aplikasi.id_perangkat','tb_daftar_aplikasi.ip_vps','tb_daftar_aplikasi.ip_public'
                     ,'tb_perangkat.id_perangkat','tb_perangkat.nama_perangkat','tb_perangkat.tipe_perangkat','tb_perangkat.status_kepemilikan')
                     ->where('tb_daftar_aplikasi.id_aplikasi',$id)->first();
         return view('Aplikasi.edit',compact('data_aplikasi','data_perangkat'));
@@ -104,6 +108,11 @@ class DaftarAplikasiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama_aplikasi' => 'unique:tb_daftar_aplikasi|required',
+            'ip_vps' => 'nullable|unique:tb_daftar_aplikasi|required',
+            'ip_public' => 'nullable|unique:tb_daftar_aplikasi|required'
+        ]);
         $aplikasi = DaftarAplikasi::find($id);
         $aplikasi->nama_aplikasi = $request->get('nama_aplikasi');
         $aplikasi->id_perangkat = $request->get('id_perangkat');

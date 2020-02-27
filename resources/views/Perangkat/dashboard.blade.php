@@ -27,8 +27,8 @@
             <tr>
                 <th >No</th>
                 <th >Nama Perangkat</th>
-                <th >Tipe Perangkat</th>
                 <th >Status Kepemilikan</th>
+                <th >Ip Server</th>
                 <th >Aksi</th>
             </tr>
             </thead>
@@ -46,6 +46,9 @@
                     processing: true,
                     serverSide: true,
                     ajax: '{{route('table.perangkat')}}',
+                    "fnCreatedRow": function (row, data, index) {
+                    $('td', row).eq(0).html(index + 1)
+			},
                     columns: [{
                         data: 'id_perangkat',
                         name: 'id_perangkat'
@@ -55,12 +58,12 @@
                             name: 'nama_perangkat'
                         },
                         {
-                            data: 'tipe_perangkat',
-                            name: 'tipe_perangkat'
-                        },
-                        {
                             data: 'status_kepemilikan',
                             name: 'status_kepemilikan'
+                        },
+                        {
+                            data: 'ip_server',
+                            name: 'ip_server'
                         },
                         {data: 'action', name: 'action', orderable: false, searchable: false, align: 'center'},
                     ],

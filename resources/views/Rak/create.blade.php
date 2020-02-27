@@ -22,7 +22,10 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="nomer_rak">Nomer Rak</label>
-                    <input type="number" class="form-control" name="nomer_rak" placeholder="Nomer Rak">
+                    <input type="text" class="form-control" name="nomer_rak" placeholder="Nomer Rak">
+                    @if ($errors->any())
+                        {!! $errors->first('nomer_rak', '<p style="font-size: 12px; color:red">ERROR! input Nomer Rak Harus Berupa Angka / Tidak Boleh Sama</p>') !!}
+                    @endif
                   </div>
                 </div>
                 <!-- /.card-body -->
