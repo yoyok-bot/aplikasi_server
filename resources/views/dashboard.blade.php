@@ -24,13 +24,22 @@
 @endphp
 <br>
     <br>
-    <div class="form-line">
-    <select name="keterangan" class="form-control show-tick" id="list">
+<div class="container-fluid">
+<div class="form-group row">
+        <h2 class="card-inside-title" style="margin-top: 0px;margin-bottom: 0px">Tampilkan
+            berdasarkan Rak :</h2>
+    <div class="col-sm-1">
+    <td><select name="keterangan" class="form-control show-tick" id="list">
+    <option value="">-</option>
     @foreach($data_rak as $rak)
     <option value="{{ $rak->id_rak }}" {{ $pilihan == $rak->id_rak ? 'selected="selected"' : '' }}> {{ $rak->nomer_rak }}</option>
     @endforeach
-    </select>
+    </select></td>
+    </div>
+    </div>
 </div>
+<br>
+<br>
 @if ($message = Session::get('success'))
       <div class="alert alert-success alert-block">
         <button type="button" class="close" data-dismiss="alert">×</button> 
@@ -59,14 +68,14 @@
     </div>
 </div>
 <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-        <h5 class="modal-title">Tabel </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Tabel </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
                 <div class="modal-body">
                     <div class="table-responsive">
                         <table class="table borderless">

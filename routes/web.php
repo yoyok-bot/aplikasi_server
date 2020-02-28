@@ -36,6 +36,7 @@ Route::get('tableseluruh','SemuaTabelController@tableseluruh')->name('table.selu
 Route::get('tablecore','CoreController@tablecore')->name('table.core');
 Route::delete('data_core/{id}/delete','CoreController@destroy');
 Route::get('anyData/{id}','SemuaTabelController@anyData');
+Route::get('anyData{id}','PerangkatController@anyData');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

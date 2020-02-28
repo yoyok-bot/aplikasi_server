@@ -38,6 +38,55 @@
         </table>
     </div>
 </div>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Data Perangkat </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table borderless">
+                            <tr>
+                                <th>Nama Perangkat</th>
+                                <td><p id="nama_perangkat" style="text-transform: capitalize"></td>
+                            </tr>
+                            <tr>
+                                <th>Tipe Perangkat</th>
+                                <td><p id="tipe_perangkat"></td>
+                            </tr>
+                            <tr>
+                                <th>Jumlah Core</th>
+                                <td><p id="jumlah_core"></td>
+                            </tr>
+                            <tr>
+                                <th>Ukuran Ram</th>
+                                <td id="ukuran_ram" ></td>
+                            </tr>
+                            <tr>
+                                <th>Ukuran Hdd</th>
+                                <td id="ukuran_hdd"></td>
+                            </tr>
+                            <tr>
+                                <th>Ip Server</th>
+                                <td id="ip_server"></td>
+                            </tr>
+                            <tr>
+                                <th>Kepemilikan</th>
+                                <td id="status_kepemilikan"></td>
+                            </tr>
+                        </table>
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
         @endsection
         @push('script')
 <script>
@@ -97,5 +146,21 @@
                     del($(this).attr('data-id'));
                 });
             });
+            $('#list').change(function () {
+                document.location.href = '{{route('index')}}?id=' + $('#list').val();
+            });
+            $('body').on("click", '.show-detail', function (e) {
+            $('#myModal').modal("show");
+            $.get("/anyData/" + $(this).attr('data-id'), function (data) {
+                console.log(data);
+                $('#nama_perangkat').text(': ' +data.nama_perangkat);
+                $('#tipe_perangkat').text(': ' +data.tipe_perangkat);
+                $('#jumlah_core').text(': ' +data.jumlah_core);
+                $('#ukuran_ram').text(': ' +data.ukuran_ram);
+                $('#ukuran_hdd').text(': ' +data.ukuran_hdd);
+                $('#ip_server').text(': ' +data.ip_server);
+                $('#status_kepemilikan').text(': ' +data.status_kepemilikan);
+            });
+        });
         </script>
 @endpush

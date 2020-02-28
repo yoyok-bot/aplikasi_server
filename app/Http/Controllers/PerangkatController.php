@@ -34,7 +34,7 @@ class PerangkatController extends Controller
             ->addColumn('action', function ($data) {
                 $del = '<a href="#" data-id="' . $data->id_perangkat . '" class="hapus-data" style="font-size: 15px"><i style="color:#d9534f" class="fa fa-trash"></i></a>';
                 $edit = '<a href="' . route('data_perangkat.edit', $data->id_perangkat) . '" style="font-size: 15px"><i style="color:#5cb85c" class="fa fa-edit"></i></a>';
-                $show = '<a href="' . route('data_perangkat.show', $data->id_perangkat) . '" style="font-size: 15px"><i class="fa fa-eye"></i></a>';
+                $show = '<a href="#" data-id="' . $data->id_perangkat . '" class="show-detail" style="font-size: 15px"><i class="fa fa-eye"></i></a>';
                 return $show . '&nbsp' . ' | ' . '&nbsp' . $edit . '&nbsp' . ' | ' . '&nbsp' . $del;
             })
             ->make(true);
@@ -67,7 +67,11 @@ class PerangkatController extends Controller
         Perangkat::create($request->all());
         return redirect()->route('data_perangkat.index')->with(['success' => 'Berhasil Disimpan']);
     }
-
+    public function anyData($id)
+    {
+        $detail_perangkat = Perangkat::all()->where('id_perangkat',$id)->first();
+            return response()->json($detail_perangkat);
+    }
     /**
      * Display the specified resource.
      *
