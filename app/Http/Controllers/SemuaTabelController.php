@@ -32,7 +32,7 @@ class SemuaTabelController extends Controller
         ->join('tb_rak','tb_rak.id_rak','=','tb_perangkat.id_rak')
         ->join('tb_core','tb_core.id_core','=','tb_perangkat.id_core')
         ->leftjoin('tb_daftar_aplikasi','tb_daftar_aplikasi.id_perangkat','=','tb_perangkat.id_perangkat')
-        ->select('tb_perangkat.id_perangkat','tb_perangkat.nama_perangkat'
+        ->select('tb_perangkat.id_perangkat','tb_perangkat.nama_perangkat','tb_perangkat.status_server'
         ,'tb_perangkat.tipe_perangkat','tb_daftar_aplikasi.nama_aplikasi','tb_daftar_aplikasi.ip_vps','tb_daftar_aplikasi.ip_public','tb_perangkat.status_kepemilikan','tb_perangkat.ip_server'
         ,'tb_ram.ukuran_ram','tb_hdd.ukuran_hdd','tb_rak.nomer_rak','tb_core.jumlah_core')
         ->get())
@@ -48,10 +48,11 @@ class SemuaTabelController extends Controller
         ->join('tb_rak','tb_rak.id_rak','=','tb_perangkat.id_rak')
         ->join('tb_core','tb_core.id_core','=','tb_perangkat.id_core')
         ->leftjoin('tb_daftar_aplikasi','tb_daftar_aplikasi.id_perangkat','=','tb_perangkat.id_perangkat')
-        ->select('tb_perangkat.id_perangkat','tb_perangkat.nama_perangkat'
+        ->select('tb_perangkat.id_perangkat','tb_perangkat.nama_perangkat','tb_perangkat.status_server'
         ,'tb_perangkat.tipe_perangkat','tb_daftar_aplikasi.nama_aplikasi','tb_daftar_aplikasi.ip_vps','tb_daftar_aplikasi.ip_public','tb_perangkat.status_kepemilikan','tb_perangkat.ip_server'
         ,'tb_ram.ukuran_ram','tb_hdd.ukuran_hdd','tb_rak.nomer_rak','tb_core.jumlah_core')
-        ->where('tb_perangkat.id_rak',$request->id)->get())
+        ->where('tb_perangkat.id_rak',$request->id)
+        ->get())
         ->addColumn('action', function ($data) {
             $show = '<a href="#" data-id="' . $data->id_perangkat . '" class="show-data" style="font-size: 15px"><i class="fa fa-eye"></i></a>';
             return $show;
@@ -90,7 +91,7 @@ class SemuaTabelController extends Controller
                     ->leftjoin('tb_daftar_aplikasi','tb_daftar_aplikasi.id_perangkat','=','tb_perangkat.id_perangkat')
                     ->select('tb_perangkat.id_perangkat','tb_perangkat.nama_perangkat'
                     ,'tb_perangkat.tipe_perangkat','tb_daftar_aplikasi.nama_aplikasi','tb_daftar_aplikasi.ip_vps','tb_daftar_aplikasi.ip_public','tb_perangkat.status_kepemilikan','tb_perangkat.ip_server'
-                    ,'tb_ram.ukuran_ram','tb_hdd.ukuran_hdd','tb_rak.nomer_rak','tb_core.jumlah_core')
+                    ,'tb_ram.ukuran_ram','tb_hdd.ukuran_hdd','tb_hdd.keterangan','tb_rak.nomer_rak','tb_core.jumlah_core')
                     ->where('tb_perangkat.id_perangkat',$id)->first();
             return response()->json($detail_perangkat);
     }

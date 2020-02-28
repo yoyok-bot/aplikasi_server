@@ -30,7 +30,7 @@
             berdasarkan Rak :</h2>
     <div class="col-sm-1">
     <td><select name="keterangan" class="form-control show-tick" id="list">
-    <option value="">-</option>
+    <option value="0">-</option>
     @foreach($data_rak as $rak)
     <option value="{{ $rak->id_rak }}" {{ $pilihan == $rak->id_rak ? 'selected="selected"' : '' }}> {{ $rak->nomer_rak }}</option>
     @endforeach
@@ -56,8 +56,8 @@
                 <th >Nama Perangkat</th>
                 <th >Ukuran Ram</th>
                 <th >Ukuran Hdd</th>
-                <th >Jumlah Core</th>
                 <th >Status kepemilikan</th>
+                <th >Status Server</th>
                 <th >Aksi</th>
             </tr>
             </thead>
@@ -157,12 +157,12 @@
                             name: 'ukuran_hdd'
                         },
                         {
-                            data: 'jumlah_core',
-                            name: 'jumlah_core'
-                        },
-                        {
                             data: 'status_kepemilikan',
                             name: 'status_kepemilikan'
+                        },
+                        {
+                            data: 'status_server',
+                            name: 'status_server'
                         },
                         {data: 'action', name: 'action', orderable: false, searchable: false, align: 'center'},
                     ]
@@ -178,8 +178,8 @@
                 $('#nama_perangkat').text(': ' +data.nama_perangkat);
                 $('#tipe_perangkat').text(': ' +data.tipe_perangkat);
                 $('#jumlah_core').text(': ' +data.jumlah_core);
-                $('#ukuran_ram').text(': ' +data.ukuran_ram);
-                $('#ukuran_hdd').text(': ' +data.ukuran_hdd);
+                $('#ukuran_ram').text(': ' +data.ukuran_ram+' GB');
+                $('#ukuran_hdd').text(': ' +data.ukuran_hdd+' '+data.keterangan);
                 $('#ip_server').text(': ' +data.ip_server);
                 $('#ip_vps').text(': ' +data.ip_vps);
                 $('#ip_public').text(': ' +data.ip_public);

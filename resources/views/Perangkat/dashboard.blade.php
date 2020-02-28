@@ -156,8 +156,8 @@
                 $('#nama_perangkat').text(': ' +data.nama_perangkat);
                 $('#tipe_perangkat').text(': ' +data.tipe_perangkat);
                 $('#jumlah_core').text(': ' +data.jumlah_core);
-                $('#ukuran_ram').text(': ' +data.ukuran_ram);
-                $('#ukuran_hdd').text(': ' +data.ukuran_hdd);
+                $('#ukuran_ram').text(': ' +data.ukuran_ram+' GB');
+                $('#ukuran_hdd').text(': ' +data.ukuran_hdd+' '+data.keterangan);
                 $('#ip_server').text(': ' +data.ip_server);
                 $('#status_kepemilikan').text(': ' +data.status_kepemilikan);
             });

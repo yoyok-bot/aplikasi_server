@@ -62,6 +62,9 @@ class PerangkatController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'nama_perangkat' => 'unique:tb_perangkat|required',
+            'tipe_perangkat' => 'unique:tb_perangkat|required',
+            'status_kepemilikan' => 'unique:tb_perangkat|required',
             'ip_server' => 'nullable|unique:tb_perangkat'
         ]);
         Perangkat::create($request->all());
@@ -127,7 +130,10 @@ class PerangkatController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'ip_server' => 'nullable|unique:tb_perangkat|required'
+            'nama_perangkat' => 'required',
+            'tipe_perangkat' => 'required',
+            'status_kepemilikan' => 'required',
+            'ip_server' => 'nullable'
         ]);
         $perangkat = Perangkat::find($id);
         $perangkat->nama_perangkat = $request->get('nama_perangkat');

@@ -29,6 +29,8 @@
                     <th>Nama Aplikasi</th>
                     <th>Nama Perangkat</th>
                     <th>Ip Server</th>
+                    <th>Ip Vps</th>
+                    <th>Ip Public</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -64,6 +66,14 @@
                         {
                             data: 'ip_server',
                             name: 'ip_server'
+                        },
+                        {
+                            data: 'ip_vps',
+                            name: 'ip_vps'
+                        },
+                        {
+                            data: 'ip_public',
+                            name: 'ip_public'
                         },
                         {data: 'action', name: 'action', orderable: false, searchable: false, align: 'center'},
                     ]

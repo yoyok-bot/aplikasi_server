@@ -23,6 +23,9 @@
                   <div class="form-group">
                     <label for="nama_aplikasi">Nama Aplikasi</label>
                     <input type="text" class="form-control" name="nama_aplikasi" placeholder="Nama Aplikasi">
+                    @if ($errors->any())
+                        {!! $errors->first('nama_perangkat', '<p style="font-size: 12px; color:red">ERROR! input Nama Aplikasi Harus Diisi </p>') !!}
+                    @endif
                   </div>
                   <div class="form-group">
                     <label for="ip_vps">Ip Vps</label>

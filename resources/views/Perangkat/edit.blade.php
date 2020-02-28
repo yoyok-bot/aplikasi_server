@@ -24,14 +24,23 @@
                   <div class="form-group">
                     <label for="nama_perangkat">Nama Perangkat</label>
                     <input type="text" class="form-control" name="nama_perangkat" value="{{$data_perangkat->nama_perangkat}}">
+                    @if ($errors->any())
+                        {!! $errors->first('nama_perangkat', '<p style="font-size: 12px; color:red">ERROR! input Nama Perangkat Harus Diisi</p>') !!}
+                    @endif
                   </div>
                   <div class="form-group">
                     <label for="tipe_perangkat">Tipe Perangkat</label>
                     <input type="text" class="form-control" name="tipe_perangkat" value="{{$data_perangkat->tipe_perangkat}}">
+                    @if ($errors->any())
+                        {!! $errors->first('tipe_perangkat', '<p style="font-size: 12px; color:red">ERROR! input Tipe Perangkat Harus Diisi</p>') !!}
+                    @endif
                   </div>
                   <div class="form-group">
                     <label for="status_kepemilikan">Status Kepemilikan</label>
                     <input type="text" class="form-control" name="status_kepemilikan" value="{{$data_perangkat->status_kepemilikan}}">
+                    @if ($errors->any())
+                        {!! $errors->first('status_kepemilikan', '<p style="font-size: 12px; color:red">ERROR! input Status Kepemilikan Harus Diisi</p>') !!}
+                    @endif
                   </div>
                   <div class="form-group">
                     <label for="ip_server">Ip Server</label>

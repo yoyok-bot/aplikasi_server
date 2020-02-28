@@ -20,7 +20,7 @@
     </div>
     <br>
     <br>
-<div class="box-body">
+<div class="box-body col-lg-6">
     <div class="table-responsive-sm">
         <table id="table1" class="table table-bordered table-striped">
             <thead>
@@ -28,7 +28,7 @@
                     <th>No</th>
                     <th>Ukuran Hdd</th>
                     <th>Keterangan</th>
-                    <th>Aksi</th>
+                    <th width="20%">Aksi</th>
                 </tr>
             </thead>
             <tbody>
