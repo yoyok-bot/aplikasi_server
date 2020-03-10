@@ -54,8 +54,8 @@
             <tr>
                 <th >No</th>
                 <th >Nama Perangkat</th>
-                <th >Ukuran Ram</th>
-                <th >Ukuran Hdd</th>
+                <th >Kapasitas Ram</th>
+                <th >Kapasitas Hdd</th>
                 <th >Status kepemilikan</th>
                 <th >Status Server</th>
                 <th >Aksi</th>
@@ -92,11 +92,11 @@
                                 <td><p id="jumlah_core"></td>
                             </tr>
                             <tr>
-                                <th>Ukuran Ram</th>
+                                <th>Kapasitas Ram</th>
                                 <td id="ukuran_ram" ></td>
                             </tr>
                             <tr>
-                                <th>Ukuran Hdd</th>
+                                <th>Kapasitas Hdd</th>
                                 <td id="ukuran_hdd"></td>
                             </tr>
                             <tr>
@@ -180,10 +180,26 @@
                 $('#jumlah_core').text(': ' +data.jumlah_core);
                 $('#ukuran_ram').text(': ' +data.ukuran_ram+' GB');
                 $('#ukuran_hdd').text(': ' +data.ukuran_hdd+' '+data.keterangan);
-                $('#ip_server').text(': ' +data.ip_server);
-                $('#ip_vps').text(': ' +data.ip_vps);
-                $('#ip_public').text(': ' +data.ip_public);
-                $('#nama_aplikasi').text(': ' +data.nama_aplikasi);
+                if(data.ip_server == null){
+                    $('#ip_server').text(': ' + 'Tidak Diketahui');
+                }else{
+                    $('#ip_server').text(': ' +data.ip_server);
+                }
+                if(data.ip_vps == null){
+                    $('#ip_vps').text(': ' + 'Tidak Diketahui');
+                }else{
+                    $('#ip_vps').text(': ' +data.ip_vps);
+                }
+                if(data.ip_public == null){
+                    $('#ip_public').text(': ' + 'Tidak Diketahui');
+                }else{
+                    $('#ip_public').text(': ' +data.ip_public);
+                }
+                if(data.nama_aplikasi == null){
+                    $('#nama_aplikasi').text(': ' + 'Tidak Diketahui');
+                }else{
+                    $('#nama_aplikasi').text(': ' +data.nama_aplikasi);
+                }
                 $('#status_kepemilikan').text(': ' +data.status_kepemilikan);
             });
         });

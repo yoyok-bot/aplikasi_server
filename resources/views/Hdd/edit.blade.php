@@ -22,17 +22,17 @@
               @csrf
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="ukuran_hdd">Ukuran Hdd</label>
+                    <label for="ukuran_hdd">Kapasitas Hdd</label>
                     <input type="text" class="form-control" name="ukuran_hdd" value="{{$hdd->ukuran_hdd}}">
                     @if ($errors->any())
-                        {!! $errors->first('ukuran_hdd', '<p style="font-size: 12px; color:red">ERROR! input Jumlah Core Harus Berupa Angka / Tidak Boleh Sama</p>') !!}
+                        {!! $errors->first('ukuran_hdd', '<p style="font-size: 12px; color:red">ERROR! input Kapasitas Harus Berupa Angka / Tidak Boleh Sama</p>') !!}
                     @endif
                   </div>
                   <div class="form-group">
                     <label for="keterangan">Keterangan(GB/TERA)</label>
                     <input type="text" class="form-control" name="keterangan" value="{{$hdd->keterangan}}">
                     @if ($errors->any())
-                        {!! $errors->first('keterangan', '<p style="font-size: 12px; color:red">ERROR! input Keterangan Harus Berupa Karakter</p>') !!}
+                        {!! $errors->first('keterangan', '<p style="font-size: 12px; color:red">ERROR! input Keterangan Harus Disisi</p>') !!}
                     @endif
                   </div>
                 </div>

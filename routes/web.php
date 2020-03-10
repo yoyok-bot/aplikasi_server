@@ -21,6 +21,7 @@ Route::resource('/data_rak', 'RakController');
 Route::resource('/data_perangkat', 'PerangkatController');
 Route::resource('/data_aplikasi', 'DaftarAplikasiController');
 Route::resource('/data_core', 'CoreController');
+Route::resource('/data_grafik', 'GrafikController');
 Route::resource('/', 'SemuaTabelController');
 Route::get('tablerak','RakController@tablerak')->name('table.rak');
 Route::delete('data_rak/{id}/delete','RakController@destroy');

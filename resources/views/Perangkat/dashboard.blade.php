@@ -63,11 +63,11 @@
                                 <td><p id="jumlah_core"></td>
                             </tr>
                             <tr>
-                                <th>Ukuran Ram</th>
+                                <th>Kapasitas Ram</th>
                                 <td id="ukuran_ram" ></td>
                             </tr>
                             <tr>
-                                <th>Ukuran Hdd</th>
+                                <th>Kapasitas Hdd</th>
                                 <td id="ukuran_hdd"></td>
                             </tr>
                             <tr>

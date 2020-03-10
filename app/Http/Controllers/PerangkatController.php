@@ -62,12 +62,35 @@ class PerangkatController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_perangkat' => 'unique:tb_perangkat|required',
-            'tipe_perangkat' => 'unique:tb_perangkat|required',
-            'status_kepemilikan' => 'unique:tb_perangkat|required',
+            'nama_perangkat' => 'required',
+            'tipe_perangkat' => 'required',
+            'status_kepemilikan' => 'required',
             'ip_server' => 'nullable|unique:tb_perangkat'
         ]);
-        Perangkat::create($request->all());
+        $nama_perangkat = $request->get('nama_perangkat');
+        $tipe_perangkat = $request->get('tipe_perangkat');
+        if($request->get('status_kepemilikan')==1){
+            $status_kepemilikan = 'KOMINFO';
+        } else {
+            $status_kepemilikan = $request->get('nama_instansi');
+        }
+        $ip_server = $request->get('ip_server');
+        $status = $request->get('status');
+        $id_hdd = $request->get('id_hdd');
+        $id_ram = $request->get('id_ram');
+        $id_rak = $request->get('id_rak');
+        $id_core = $request->get('id_core');
+        $data = new Perangkat();
+        $data->nama_perangkat=$nama_perangkat;
+        $data->tipe_perangkat=$tipe_perangkat;
+        $data->status_kepemilikan=$status_kepemilikan;
+        $data->ip_server=$ip_server;
+        $data->status_server=$status;
+        $data->id_hdd=$id_hdd;
+        $data->id_ram=$id_ram;
+        $data->id_rak=$id_rak;
+        $data->id_core=$id_core;
+        $data->save();
         return redirect()->route('data_perangkat.index')->with(['success' => 'Berhasil Disimpan']);
     }
     public function anyData($id)

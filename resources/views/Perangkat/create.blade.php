@@ -35,11 +35,19 @@
                     @endif
                   </div>
                   <div class="form-group">
-                    <label for="status_kepemilikan">Satus Kepemilikan</label>
-                    <input type="text" class="form-control" name="status_kepemilikan" value="{{old('status_kepemilikan')}}" placeholder="Status Kepemilikan">
+                    <label for="status_kepemilikan">Status Kepemilikan</label>
+                    <select class="form-control" name="status_kepemilikan" id="status_kepemilikan">
+                    <option value="">Pilih</option>
+                    <option value="1">KOMINFO</option>
+                    <option value="2">COLOCATION</option>
+                    </select>
+                    <div id="div-co" style="display:none" class="form-group">
+                    <label for="nama_instansi">INSTANSI</label>
+                    <input type="text" class="form-control" id="nama_instansi" name="nama_instansi">
                     @if ($errors->any())
-                        {!! $errors->first('status_kepemilikan', '<p style="font-size: 12px; color:red">ERROR! input Status Kepemilikan Harus Diisi</p>') !!}
+                        {!! $errors->first('ip_server', '<p style="font-size: 12px; color:red">ERROR! input Ip Server Tidak Boleh Sama</p>') !!}
                     @endif
+                  </div>
                   </div>
                   <div class="form-group">
                     <label for="ip_server">Ip Server (192.168.99.01)</label>
@@ -52,38 +60,38 @@
                     <input type="hidden" class="form-control" name="status" value="Aktif">
                   </div>
                   <div class="form-group">
-                    <label for="id_hdd">Ukuran Hdd</label>
-                    <select class="form-control" name="id_hdd">
+                    <label for="id_hdd">Kapasitas Hdd</label>
+                    <select id="hdd" class="form-control" name="id_hdd">
                     <option>Pilih Hdd</option>
                     @foreach ($data_hdd as $hdd)
-                    <option value="{{ $hdd->id_hdd }}"> {{ $hdd->ukuran_hdd }} ({{$hdd->keterangan}})</option>
+                    <option value="{{ $hdd->id_hdd }}" {{ old('id_hdd') == $hdd->id_hdd ? 'selected="selected"' : '' }}> {{ $hdd->ukuran_hdd }} ({{$hdd->keterangan}})</option>
                     @endforeach    
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="id_ram">Ukuran Ram</label>
-                    <select class="form-control" name="id_ram">
+                    <label for="id_ram">Kapasitas Ram</label>
+                    <select id="ram" class="form-control" name="id_ram">
                     <option>Pilih Ram</option>
                     @foreach ($data_ram as $ram)
-                    <option value="{{ $ram->id_ram }}"> {{ $ram->ukuran_ram }}</option>
+                    <option value="{{ $ram->id_ram }}" {{ old('id_ram') == $ram->id_ram ? 'selected="selected"' : '' }}> {{ $ram->ukuran_ram }} (GB)</option>
                     @endforeach    
                     </select>
                   </div>
                   <div class="form-group">
                     <label for="nomer_rak">Nomer Rak</label>
-                    <select class="form-control" name="id_rak">
+                    <select id="rak" class="form-control" name="id_rak">
                     <option>Pilih Rak</option>
                     @foreach ($data_rak as $rak)
-                    <option value="{{ $rak->id_rak }}"> {{ $rak->nomer_rak }}</option>
+                    <option value="{{ $rak->id_rak }}" {{ old('id_rak') == $rak->id_rak ? 'selected="selected"' : '' }}> {{ $rak->nomer_rak }}</option>
                     @endforeach    
                     </select>
                   </div>
                   <div class="form-group">
                     <label for="jumlah_core">Jumlah Core</label>
-                    <select class="form-control" name="id_core">
-                    <option>Pilih Rak</option>
+                    <select id="core" class="form-control" name="id_core">
+                    <option>Pilih Core</option>
                     @foreach ($data_core as $core)
-                    <option value="{{ $core->id_core }}"> {{ $core->jumlah_core }}</option>
+                    <option value="{{ $core->id_core }}" {{ old('id_core') == $core->id_core ? 'selected="selected"' : '' }}> {{ $core->jumlah_core }}</option>
                     @endforeach    
                     </select>
                   </div>
@@ -99,3 +107,23 @@
     </div>
 </div>
 @endsection
+@push('script')
+<script>
+  $("#status_kepemilikan").change(function(){
+    var id = $(this).val();
+    if(id==2){
+      $('#div-co').show();
+      $('#nama_instansi').val("COLOCATION/");
+    } else {
+      $('#div-co').hide();
+      $('#nama_instansi').val("");
+    }
+  });
+  $(document).ready(function() {
+    $('#hdd').select2();
+    $('#ram').select2();
+    $('#rak').select2();
+    $('#core').select2();
+});
+  </script>
+@endpush

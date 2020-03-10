@@ -26,7 +26,7 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Ukuran Hdd</th>
+                    <th>Kapaitas Hdd</th>
                     <th>Keterangan</th>
                     <th width="20%">Aksi</th>
                 </tr>

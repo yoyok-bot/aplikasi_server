@@ -27,11 +27,11 @@ class SemuaTabelController extends Controller
     {
         if ($request->id == 0) {
         return DataTables::of(DB::table('tb_perangkat')
-        ->join('tb_ram','tb_ram.id_ram','=','tb_perangkat.id_ram')
-        ->join('tb_hdd','tb_hdd.id_hdd','=','tb_perangkat.id_hdd')
-        ->join('tb_rak','tb_rak.id_rak','=','tb_perangkat.id_rak')
-        ->join('tb_core','tb_core.id_core','=','tb_perangkat.id_core')
-        ->leftjoin('tb_daftar_aplikasi','tb_daftar_aplikasi.id_perangkat','=','tb_perangkat.id_perangkat')
+        ->leftjoin('tb_ram','tb_perangkat.id_ram','=','tb_ram.id_ram')
+        ->leftjoin('tb_hdd','tb_perangkat.id_hdd','=','tb_hdd.id_hdd')
+        ->leftjoin('tb_rak','tb_perangkat.id_rak','=','tb_rak.id_rak')
+        ->leftjoin('tb_core','tb_perangkat.id_core','=','tb_core.id_core')
+        ->leftjoin('tb_daftar_aplikasi','tb_perangkat.id_perangkat','=','tb_daftar_aplikasi.id_perangkat')
         ->select('tb_perangkat.id_perangkat','tb_perangkat.nama_perangkat','tb_perangkat.status_server'
         ,'tb_perangkat.tipe_perangkat','tb_daftar_aplikasi.nama_aplikasi','tb_daftar_aplikasi.ip_vps','tb_daftar_aplikasi.ip_public','tb_perangkat.status_kepemilikan','tb_perangkat.ip_server'
         ,'tb_ram.ukuran_ram','tb_hdd.ukuran_hdd','tb_rak.nomer_rak','tb_core.jumlah_core')
