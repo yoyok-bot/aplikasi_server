@@ -69,7 +69,7 @@
             <!-- LINE CHART -->
             <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Grafik Berdasarkan Hdd</h3>
+                <h3 class="card-title">Grafik Berdasarkan HDD</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                   </button>
@@ -87,7 +87,7 @@
             <!-- BAR CHART -->
             <div class="card card-success">
               <div class="card-header">
-                <h3 class="card-title">Grafik Berdasarkan Ram</h3>
+                <h3 class="card-title">Grafik Berdasarkan RAM</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                   </button>
@@ -103,21 +103,6 @@
             <!-- /.card -->
 
             <!-- STACKED BAR CHART -->
-            <div class="card card-success">
-              <div class="card-header">
-                <h3 class="card-title">Grafik Berdasarkan Ip Server</h3>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart">
-                  <canvas id="ipserverChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
             <!-- /.card -->
 
           </div>
@@ -251,47 +236,6 @@
         }]
       }
     }
-    var ip_server = document.getElementById('ipserverChart').getContext('2d');
-    var areaChartData_ip_server = {
-      labels  : [@foreach($chart_ip_server as $value)
-                       'Ip_server {{$value->ip_server}}',
-                       @endforeach],
-      datasets: [
-        {
-          label               : 'Digital Goods',
-          backgroundColor     : 'rgba(60,141,188,0.9)',
-          borderColor         : 'rgba(60,141,188,0.8)',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [@foreach($chart_ip_server as $value)
-                       {{$value->total}},
-                       @endforeach]
-        },
-      ]
-    }
-
-    var areaChartOptions = {
-      maintainAspectRatio : false,
-      responsive : true,
-      legend: {
-        display: false
-      },
-      scales: {
-        xAxes: [{
-          gridLines : {
-            display : false,
-          }
-        }],
-        yAxes: [{
-          gridLines : {
-            display : false,
-          }
-        }]
-      }
-    }
 
     // This will get the first returned node in the jQuery collection.
 
@@ -303,11 +247,6 @@
     lineChartData.datasets[0].fill = false;
     lineChartOptions.datasetFill = false
 
-    var areaChart       = new Chart(ip_server, { 
-      type: 'line',
-      data: areaChartData_ip_server, 
-      options: areaChartOptions
-    })
     var lineChart = new Chart(core, { 
       type: 'line',
       data: lineChartData, 

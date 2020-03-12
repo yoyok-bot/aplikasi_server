@@ -37,16 +37,16 @@
                   <div class="form-group">
                     <label for="status_kepemilikan">Status Kepemilikan</label>
                     <select class="form-control" name="status_kepemilikan" id="status_kepemilikan">
-                    <option value="">Pilih</option>
+                    <option value=" ">Pilih</option>
                     <option value="1">KOMINFO</option>
                     <option value="2">COLOCATION</option>
                     </select>
+                    @if ($errors->any())
+                        {!! $errors->first('status_kepemilikan', '<p style="font-size: 12px; color:red">ERROR! Harus Dipilih Salah satu</p>') !!}
+                    @endif
                     <div id="div-co" style="display:none" class="form-group">
                     <label for="nama_instansi">INSTANSI</label>
                     <input type="text" class="form-control" id="nama_instansi" name="nama_instansi">
-                    @if ($errors->any())
-                        {!! $errors->first('ip_server', '<p style="font-size: 12px; color:red">ERROR! input Ip Server Tidak Boleh Sama</p>') !!}
-                    @endif
                   </div>
                   </div>
                   <div class="form-group">
@@ -60,40 +60,52 @@
                     <input type="hidden" class="form-control" name="status" value="Aktif">
                   </div>
                   <div class="form-group">
-                    <label for="id_hdd">Kapasitas Hdd</label>
+                    <label for="id_hdd">Kapasitas HDD</label>
                     <select id="hdd" class="form-control" name="id_hdd">
-                    <option>Pilih Hdd</option>
+                    <option value=" ">Pilih Hdd</option>
                     @foreach ($data_hdd as $hdd)
                     <option value="{{ $hdd->id_hdd }}" {{ old('id_hdd') == $hdd->id_hdd ? 'selected="selected"' : '' }}> {{ $hdd->ukuran_hdd }} ({{$hdd->keterangan}})</option>
                     @endforeach    
                     </select>
+                    @if ($errors->any())
+                        {!! $errors->first('id_hdd', '<p style="font-size: 12px; color:red">ERROR! Harus Dipilih Salah satu</p>') !!}
+                    @endif
                   </div>
                   <div class="form-group">
-                    <label for="id_ram">Kapasitas Ram</label>
+                    <label for="id_ram">Kapasitas RAM</label>
                     <select id="ram" class="form-control" name="id_ram">
-                    <option>Pilih Ram</option>
+                    <option value=" ">Pilih Ram</option>
                     @foreach ($data_ram as $ram)
                     <option value="{{ $ram->id_ram }}" {{ old('id_ram') == $ram->id_ram ? 'selected="selected"' : '' }}> {{ $ram->ukuran_ram }} (GB)</option>
                     @endforeach    
                     </select>
+                    @if ($errors->any())
+                        {!! $errors->first('id_ram', '<p style="font-size: 12px; color:red">ERROR! Harus Dipilih Salah satu</p>') !!}
+                    @endif
                   </div>
                   <div class="form-group">
                     <label for="nomer_rak">Nomer Rak</label>
                     <select id="rak" class="form-control" name="id_rak">
-                    <option>Pilih Rak</option>
+                    <option value=" ">Pilih Rak</option>
                     @foreach ($data_rak as $rak)
                     <option value="{{ $rak->id_rak }}" {{ old('id_rak') == $rak->id_rak ? 'selected="selected"' : '' }}> {{ $rak->nomer_rak }}</option>
                     @endforeach    
                     </select>
+                    @if ($errors->any())
+                        {!! $errors->first('id_rak', '<p style="font-size: 12px; color:red">ERROR! Harus Dipilih Salah satu</p>') !!}
+                    @endif
                   </div>
                   <div class="form-group">
                     <label for="jumlah_core">Jumlah Core</label>
                     <select id="core" class="form-control" name="id_core">
-                    <option>Pilih Core</option>
+                    <option value=" ">Pilih Core</option>
                     @foreach ($data_core as $core)
                     <option value="{{ $core->id_core }}" {{ old('id_core') == $core->id_core ? 'selected="selected"' : '' }}> {{ $core->jumlah_core }}</option>
                     @endforeach    
                     </select>
+                    @if ($errors->any())
+                        {!! $errors->first('id_core', '<p style="font-size: 12px; color:red">ERROR! Harus Dipilih Salah satu</p>') !!}
+                    @endif
                   </div>
                 </div>
                 <!-- /.card-body -->

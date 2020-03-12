@@ -46,6 +46,7 @@
           <strong>{{ $message }}</strong>
       </div>
     @endif
+    <a href="seluruh_rak/cetak_pdf_seluruh" class="btn btn-primary" target="_blank">CETAK PDF</a>
     <div class="col-sm-12">
 <div class="box-body">
     <div class="table-responsive-sm">
@@ -54,8 +55,8 @@
             <tr>
                 <th >No</th>
                 <th >Nama Perangkat</th>
-                <th >Kapasitas Ram</th>
-                <th >Kapasitas Hdd</th>
+                <th >Kapasitas RAM</th>
+                <th >Kapasitas HDD</th>
                 <th >Status kepemilikan</th>
                 <th >Status Server</th>
                 <th >Aksi</th>
@@ -71,7 +72,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Tabel </h5>
+            <h5 class="modal-title">Tabel Detail</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -92,11 +93,11 @@
                                 <td><p id="jumlah_core"></td>
                             </tr>
                             <tr>
-                                <th>Kapasitas Ram</th>
+                                <th>Kapasitas RAM</th>
                                 <td id="ukuran_ram" ></td>
                             </tr>
                             <tr>
-                                <th>Kapasitas Hdd</th>
+                                <th>Kapasitas HDD</th>
                                 <td id="ukuran_hdd"></td>
                             </tr>
                             <tr>
@@ -128,6 +129,29 @@
             </div>
         </div>
     </div>
+    <div id="myModal1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Data Aplikasi Server </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table borderless">
+                            <tbody id="apk">
+                            </tbody>
+                        </table>
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
         @endsection
         @push('script')
@@ -149,11 +173,11 @@
                             name: 'nama_perangkat'
                         },
                         {
-                            data: 'ukuran_ram',
+                            data: 'nama_aplikasi',
                             name: 'ukuran_ram'
                         },
                         {
-                            data: 'ukuran_hdd',
+                            data: 'ip_server',
                             name: 'ukuran_hdd'
                         },
                         {
@@ -196,11 +220,25 @@
                     $('#ip_public').text(': ' +data.ip_public);
                 }
                 if(data.nama_aplikasi == null){
-                    $('#nama_aplikasi').text(': ' + 'Tidak Diketahui');
+                    $('#nama_aplikasi').html(': ' +'Tidak Diketahui');
                 }else{
-                    $('#nama_aplikasi').text(': ' +data.nama_aplikasi);
+                    $('#nama_aplikasi').html(': ' +'<a href="#" data-id='+data.ip_server+' class="show-nama_aplikasi" style="font-size: 15px">'+data.nama_aplikasi+'</a>');
                 }
                 $('#status_kepemilikan').text(': ' +data.status_kepemilikan);
+            });
+        });
+        $('body').on("click", '.show-nama_aplikasi', function (e) {
+            var valip='';
+            var val ='';
+            $('#myModal1').modal("show");
+            $('#myModal').modal("hide");
+            $.get("/anyDataaplikasi/" + $(this).attr('data-id'), function (data) {
+                console.log(data);
+                $.each(data, function (index, z) {
+                valip = '<center>'+z.ip_server+'</center>';
+                val += '<tr><td>'+z.nama_aplikasi+'</td></tr>';
+                });
+                $('#apk').html(valip + '<br>' + val);
             });
         });
         </script>

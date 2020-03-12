@@ -26,7 +26,7 @@
             <thead>
             <tr>
                 <th >No</th>
-                <th >Ukuran Ram</th>
+                <th >Ukuran RAM</th>
                 <th width="20%">Aksi</th>
             </tr>
             </thead>

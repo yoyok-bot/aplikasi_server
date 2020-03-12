@@ -65,7 +65,11 @@ class PerangkatController extends Controller
             'nama_perangkat' => 'required',
             'tipe_perangkat' => 'required',
             'status_kepemilikan' => 'required',
-            'ip_server' => 'nullable|unique:tb_perangkat'
+            'ip_server' => 'nullable|unique:tb_perangkat',
+            'id_hdd' => 'required',
+            'id_ram' => 'required',
+            'id_rak' => 'required',
+            'id_core' => 'required'
         ]);
         $nama_perangkat = $request->get('nama_perangkat');
         $tipe_perangkat = $request->get('tipe_perangkat');
@@ -93,9 +97,17 @@ class PerangkatController extends Controller
         $data->save();
         return redirect()->route('data_perangkat.index')->with(['success' => 'Berhasil Disimpan']);
     }
-    public function anyData($id)
+    public function anyData1($id)
     {
-        $detail_perangkat = Perangkat::all()->where('id_perangkat',$id)->first();
+        $detail_perangkat = DB::table('tb_perangkat')
+        ->join('tb_ram','tb_ram.id_ram','=','tb_perangkat.id_ram')
+        ->join('tb_hdd','tb_hdd.id_hdd','=','tb_perangkat.id_hdd')
+        ->join('tb_rak','tb_rak.id_rak','=','tb_perangkat.id_rak')
+        ->join('tb_core','tb_core.id_core','=','tb_perangkat.id_core')
+        ->select('tb_perangkat.id_perangkat','tb_perangkat.nama_perangkat'
+        ,'tb_perangkat.tipe_perangkat','tb_perangkat.status_kepemilikan','tb_perangkat.ip_server','tb_perangkat.status_server'
+        ,'tb_ram.ukuran_ram','tb_hdd.ukuran_hdd','tb_hdd.keterangan','tb_rak.nomer_rak','tb_core.jumlah_core')
+        ->where('tb_perangkat.id_perangkat',$id)->first();
             return response()->json($detail_perangkat);
     }
     /**

@@ -92,8 +92,7 @@ class HddController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'ukuran_hdd' => 'numeric|unique:tb_hdd|required',
-            'keterangan' => 'required'
+            'keterangan' => 'required|max:2'
         ]);
         $hdd = Hdd::find($id);
         $hdd->ukuran_hdd = $request->get('ukuran_hdd');

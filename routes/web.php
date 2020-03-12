@@ -36,8 +36,10 @@ Route::delete('data_aplikasi/{id}/delete','DaftarAplikasiController@destroy');
 Route::get('tableseluruh','SemuaTabelController@tableseluruh')->name('table.seluruh');
 Route::get('tablecore','CoreController@tablecore')->name('table.core');
 Route::delete('data_core/{id}/delete','CoreController@destroy');
+Route::get('anyDataaplikasi/{id}','SemuaTabelController@anyDataaplikasi');
 Route::get('anyData/{id}','SemuaTabelController@anyData');
-Route::get('anyData{id}','PerangkatController@anyData');
+Route::get('anyData1/{id}','PerangkatController@anyData1');
+Route::get('seluruh_rak/cetak_pdf_seluruh', 'SemuaTabelController@cetak_pdf_seluruh');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

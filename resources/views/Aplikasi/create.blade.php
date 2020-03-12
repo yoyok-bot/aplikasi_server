@@ -20,11 +20,11 @@
               <form role="form" action="{{route('data_aplikasi.store')}}" method="POST">
               @csrf
                 <div class="card-body">
-                  <div class="form-group">
+                  <div class="form-group{{ $errors->has('nama_aplikasi') ? ' has-error' : '' }}">
                     <label for="nama_aplikasi">Nama Aplikasi</label>
                     <input type="text" class="form-control" name="nama_aplikasi" value="{{old('nama_aplikasi')}}" placeholder="Nama Aplikasi">
                     @if ($errors->any())
-                        {!! $errors->first('nama_aplikasi', '<p style="font-size: 12px; color:red">ERROR! input Nama Aplikasi Harus Diisi </p>') !!}
+                        {!! $errors->first('nama_aplikasi', '<p style="font-size: 12px; color:red">ERROR! input Nama Aplikasi Harus Diisi/Tidak Boleh Sama </p>') !!}
                     @endif
                   </div>
                   <div class="form-group">
@@ -44,11 +44,14 @@
                   <div class="form-group">
                     <label for="id_perangkat">Nama Perangkat</label>
                     <select id="perangkat" class="form-control" name="id_perangkat">
-                    <option>Pilih Nama Perangkat</option>
+                    <option value="">Pilih Nama Perangkat</option>
                     @foreach ($data_perangkat as $perangkat)
                     <option value="{{ $perangkat->id_perangkat }}" {{ old('id_perangkat') == $perangkat->id_perangkat ? 'selected="selected"' : '' }}> Nama Perangkat : {{ $perangkat->nama_perangkat }} || Ip Server : {{ $perangkat->ip_server }}</option>
                     @endforeach    
                     </select>
+                    @if ($errors->any())
+                        {!! $errors->first('id_perangkat', '<p style="font-size: 12px; color:red">ERROR! Harus Pilih Salah Satu</p>') !!}
+                    @endif
                   </div>
                 </div>
                 <!-- /.card-body -->

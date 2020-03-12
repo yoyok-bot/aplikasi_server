@@ -66,7 +66,8 @@ class DaftarAplikasiController extends Controller
         $request->validate([
             'nama_aplikasi' => 'unique:tb_daftar_aplikasi|required',
             'ip_vps' => 'nullable|unique:tb_daftar_aplikasi',
-            'ip_public' => 'nullable|unique:tb_daftar_aplikasi'
+            'ip_public' => 'nullable|unique:tb_daftar_aplikasi',
+            'id_perangkat' => 'required',
         ]);
         DaftarAplikasi::create($request->all());
         return redirect()->route('data_aplikasi.index')->with(['success' => 'Berhasil Disimpan']);

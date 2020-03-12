@@ -63,11 +63,11 @@
                                 <td><p id="jumlah_core"></td>
                             </tr>
                             <tr>
-                                <th>Kapasitas Ram</th>
+                                <th>Kapasitas RAM</th>
                                 <td id="ukuran_ram" ></td>
                             </tr>
                             <tr>
-                                <th>Kapasitas Hdd</th>
+                                <th>Kapasitas HDD</th>
                                 <td id="ukuran_hdd"></td>
                             </tr>
                             <tr>
@@ -151,7 +151,7 @@
             });
             $('body').on("click", '.show-detail', function (e) {
             $('#myModal').modal("show");
-            $.get("/anyData/" + $(this).attr('data-id'), function (data) {
+            $.get("/anyData1/" + $(this).attr('data-id'), function (data) {
                 console.log(data);
                 $('#nama_perangkat').text(': ' +data.nama_perangkat);
                 $('#tipe_perangkat').text(': ' +data.tipe_perangkat);
