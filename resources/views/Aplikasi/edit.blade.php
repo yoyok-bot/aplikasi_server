@@ -24,23 +24,14 @@
                   <div class="form-group">
                     <label for="nama_aplikasi">Nama Aplikasi</label>
                     <input type="text" class="form-control" name="nama_aplikasi" value="{{$data_aplikasi->nama_aplikasi}}">
-                    @if ($errors->any())
-                        {!! $errors->first('nama_aplikasi', '<p style="font-size: 12px; color:red">ERROR! input Nama Aplikasi Harus Diisi</p>') !!}
-                    @endif
                   </div>
                   <div class="form-group">
                     <label for="ip_vps">Ip Vps</label>
                     <input type="text" class="form-control" name="ip_vps" value="{{$data_aplikasi->ip_vps}}">
-                    @if ($errors->any())
-                        {!! $errors->first('ip_vps', '<p style="font-size: 12px; color:red">ERROR! input Ip Vps Harus Diisi</p>') !!}
-                    @endif
                   </div>
                   <div class="form-group">
                     <label for="ip_public">Ip Public</label>
                     <input type="text" class="form-control" name="ip_public" value="{{$data_aplikasi->ip_public}}">
-                    @if ($errors->any())
-                        {!! $errors->first('ip_public', '<p style="font-size: 12px; color:red">ERROR! input Ip Public Harus Diisi</p>') !!}
-                    @endif
                   </div>
                   <div class="form-group">
                     <label for="id_perangkat">Nama Perangkat</label>

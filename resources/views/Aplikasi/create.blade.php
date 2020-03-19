@@ -23,9 +23,6 @@
                   <div class="form-group{{ $errors->has('nama_aplikasi') ? ' has-error' : '' }}">
                     <label for="nama_aplikasi">Nama Aplikasi</label>
                     <input type="text" class="form-control" name="nama_aplikasi" value="{{old('nama_aplikasi')}}" placeholder="Nama Aplikasi">
-                    @if ($errors->any())
-                        {!! $errors->first('nama_aplikasi', '<p style="font-size: 12px; color:red">ERROR! input Nama Aplikasi Harus Diisi/Tidak Boleh Sama </p>') !!}
-                    @endif
                   </div>
                   <div class="form-group">
                     <label for="ip_vps">Ip Vps</label>

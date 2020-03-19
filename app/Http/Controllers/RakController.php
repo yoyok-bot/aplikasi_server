@@ -51,7 +51,7 @@ class RakController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nomer_rak' => 'numeric|unique:tb_rak|required'
+            'nomer_rak' => 'unique:tb_rak|required'
         ]);
         Rak::create($request->all());
         return redirect()->route('data_rak.index')->with(['success' => 'Berhasil Disimpan']);
@@ -89,9 +89,6 @@ class RakController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nomer_rak' => 'numeric|unique:tb_rak|required'
-        ]);
         $rak = Rak::find($id);
         $rak->nomer_rak = $request->get('nomer_rak');
         $rak->update();

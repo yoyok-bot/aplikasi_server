@@ -53,7 +53,7 @@ class CoreController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jumlah_core' => 'numeric|unique:tb_core|required'
+            'jumlah_core' => 'unique:tb_core|required'
         ]);
         Core::create($request->all());
         return redirect()->route('data_core.index')->with(['success' => 'Berhasil Disimpan']);
@@ -91,9 +91,6 @@ class CoreController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'jumlah_core' => 'numeric|unique:tb_core|required'
-        ]);
         $core = Core::find($id);
         $core->jumlah_core = $request->get('jumlah_core');
         $core->update();

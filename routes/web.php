@@ -40,6 +40,9 @@ Route::get('anyDataaplikasi/{id}','SemuaTabelController@anyDataaplikasi');
 Route::get('anyData/{id}','SemuaTabelController@anyData');
 Route::get('anyData1/{id}','PerangkatController@anyData1');
 Route::get('seluruh_rak/cetak_pdf_seluruh', 'SemuaTabelController@cetak_pdf_seluruh');
+Route::get('cetak_rak/cetak_pdf_rak/{id}', 'SemuaTabelController@cetak_pdf_rak');
+Route::get('cetakaplikasi/cetak_pdf_aplikasi/{id}', 'SemuaTabelController@cetak_pdf_aplikasi');
+Route::get('cetakserver/cetak_pdf_server/{id}', 'SemuaTabelController@cetak_pdf_server');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

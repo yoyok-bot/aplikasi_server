@@ -52,7 +52,7 @@ class RamController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'ukuran_ram' => 'numeric|unique:tb_ram|required'
+            'ukuran_ram' => 'unique:tb_ram|required'
         ]);
         Ram::create($request->all());
         return redirect()->route('data_ram.index')->with(['success' => 'Berhasil Disimpan']);
@@ -92,7 +92,7 @@ class RamController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'ukuran_ram' => 'numeric|unique:tb_ram|required'
+            'ukuran_ram' => 'unique:tb_ram|required'
         ]);
         $ram = Ram::find($id);
         $ram->ukuran_ram = $request->get('ukuran_ram');

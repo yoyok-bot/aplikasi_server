@@ -115,7 +115,7 @@
     var donutData_rak      = {
       labels: [
         @foreach($chart as $value)
-                       'Rak {{$value->nomer_rak}}',
+                       '{{$value->nomer_rak}}',
                        @endforeach
       ],
       datasets: [
@@ -135,7 +135,7 @@
     var donutData_ram        = {
       labels: [
         @foreach($chart_ram as $value)
-                       'Kapasitas Ram {{$value->ukuran_ram}} GB',
+                       '{{$value->ukuran_ram}} GB',
                        @endforeach
       ],
       datasets: [
@@ -156,7 +156,7 @@
     var hdd = document.getElementById('hddChart').getContext('2d');
     var areaChartData_hdd = {
       labels  : [@foreach($chart_hdd as $value)
-                       'Kapasitas Hdd {{$value->ukuran_hdd}} {{$value->keterangan}}',
+                       '{{$value->ukuran_hdd}} {{$value->keterangan}}',
                        @endforeach],
       datasets: [
         {
@@ -171,13 +171,14 @@
           data                : [@foreach($chart_hdd as $value)
                        {{$value->total}},
                        @endforeach]
-        },
+        }
       ]
     }
+    
     var aplikasi = document.getElementById('namaChart').getContext('2d');
     var areaChartData_aplikasi = {
       labels  : [@foreach($chart_aplikasi as $value)
-                       'Laptop {{$value->nama_perangkat}}',
+                       '{{$value->nama_perangkat}}',
                        @endforeach],
       datasets: [
         {
@@ -198,7 +199,7 @@
     var core = document.getElementById('coreChart').getContext('2d');
     var areaChartData_core = {
       labels  : [@foreach($chart_core as $value)
-                       'Jumlah Core {{$value->jumlah_core}}',
+                       '{{$value->jumlah_core}}',
                        @endforeach],
       datasets: [
         {
@@ -210,7 +211,7 @@
           pointStrokeColor    : 'rgba(60,141,188,1)',
           pointHighlightFill  : '#fff',
           pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [@foreach($chart_core as $value)
+          data                : [0,@foreach($chart_core as $value)
                        {{$value->total}},
                        @endforeach]
         },

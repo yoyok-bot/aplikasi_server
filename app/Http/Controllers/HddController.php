@@ -52,7 +52,7 @@ class HddController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'ukuran_hdd' => 'numeric|unique:tb_hdd|required',
+            'ukuran_hdd' => 'unique:tb_hdd|required',
             'keterangan' => 'required'
         ]);
         Hdd::create($request->all());

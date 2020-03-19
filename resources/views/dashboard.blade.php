@@ -39,14 +39,21 @@
     </div>
 </div>
 <br>
-<br>
 @if ($message = Session::get('success'))
       <div class="alert alert-success alert-block">
         <button type="button" class="close" data-dismiss="alert">×</button> 
           <strong>{{ $message }}</strong>
       </div>
     @endif
-    <a href="seluruh_rak/cetak_pdf_seluruh" class="btn btn-primary" target="_blank">CETAK PDF</a>
+    <center>
+    @if($pilihan==0)
+    <a href="seluruh_rak/cetak_pdf_seluruh" class="btn btn-primary" target="_blank">CETAK PEANGKAT SELURUH</a>
+    @else
+    <a href="/cetak_rak/cetak_pdf_rak/{{$pilihan}}" class="btn btn-primary" target="_blank">CETAK ERANGKAT PER RAK</a>
+    @endif
+    </center>
+    <br>
+    <br>
     <div class="col-sm-12">
 <div class="box-body">
     <div class="table-responsive-sm">
@@ -77,7 +84,7 @@
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-                <div class="modal-body">
+                <div id="printThis" class="modal-body">
                     <div class="table-responsive">
                         <table class="table borderless">
                             <tr>
@@ -124,6 +131,7 @@
                     </div> 
                 </div>
                 <div class="modal-footer">
+                    <a href="#" id="print" target="_blank" class="btn btn-danger">Print Detail</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -147,6 +155,7 @@
                     </div> 
                 </div>
                 <div class="modal-footer">
+                    <a href="#" id="print2" target="_blank" class="btn btn-danger">Print Server</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -225,20 +234,24 @@
                     $('#nama_aplikasi').html(': ' +'<a href="#" data-id='+data.ip_server+' class="show-nama_aplikasi" style="font-size: 15px">'+data.nama_aplikasi+'</a>');
                 }
                 $('#status_kepemilikan').text(': ' +data.status_kepemilikan);
+                $('#print').attr("href", "/cetakaplikasi/cetak_pdf_aplikasi/"+data.id_aplikasi);
             });
         });
         $('body').on("click", '.show-nama_aplikasi', function (e) {
             var valip='';
             var val ='';
+            var val1 ='';
             $('#myModal1').modal("show");
             $('#myModal').modal("hide");
             $.get("/anyDataaplikasi/" + $(this).attr('data-id'), function (data) {
                 console.log(data);
                 $.each(data, function (index, z) {
                 valip = '<center>'+z.ip_server+'</center>';
+                val1 = ''+z.ip_server+'';
                 val += '<tr><td>'+z.nama_aplikasi+'</td></tr>';
                 });
                 $('#apk').html(valip + '<br>' + val);
+                $('#print2').attr("href", "/cetakserver/cetak_pdf_server/"+val1);
             });
         });
         </script>

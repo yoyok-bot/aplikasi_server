@@ -27,7 +27,7 @@ class GrafikController extends Controller
                 ->leftjoin('tb_core','tb_core.id_core','=','tb_perangkat.id_core')
                 ->groupby('jumlah_core')->get();  
         $chart_hdd = Perangkat::select('ukuran_hdd','keterangan',DB::raw('count(nama_perangkat) as total'))
-                ->leftjoin('tb_hdd','tb_hdd.id_hdd','=','tb_perangkat.id_hdd')
+                ->join('tb_hdd','tb_hdd.id_hdd','=','tb_perangkat.id_hdd')
                 ->groupby('ukuran_hdd','keterangan')->get();        
         $chart_ram = Ram::select('ukuran_ram',DB::raw('count(nama_perangkat) as total'))
                 ->rightjoin('tb_perangkat','tb_perangkat.id_ram','=','tb_ram.id_ram')

@@ -64,7 +64,6 @@ class DaftarAplikasiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_aplikasi' => 'unique:tb_daftar_aplikasi|required',
             'ip_vps' => 'nullable|unique:tb_daftar_aplikasi',
             'ip_public' => 'nullable|unique:tb_daftar_aplikasi',
             'id_perangkat' => 'required',
@@ -110,9 +109,6 @@ class DaftarAplikasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama_aplikasi' => 'required'
-        ]); 
         $aplikasi = DaftarAplikasi::find($id);
         $aplikasi->update($request->all());
         return redirect()->route('data_aplikasi.index')->with(['success' => 'Berhasil Diedit']);
